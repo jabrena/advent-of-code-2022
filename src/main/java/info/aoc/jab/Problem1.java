@@ -21,17 +21,13 @@ import java.util.function.Function;
 public class Problem1 {
 
     public static void main( String[] args ) {
-        System.out.println( "Day 1: Calorie Counting" );
 
         Function<String, List<String>> loadFile = (fileName) -> {
             try {
                 ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-                URL resource = classloader.getResource(fileName);
-                File file = new File(resource.toURI());
+                File file = new File(classloader.getResource(fileName).toURI());
                 return Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-            } catch (URISyntaxException e) {
-                throw new RuntimeException(e);
-            } catch (IOException e) {
+            } catch (URISyntaxException | IOException e) {
                 throw new RuntimeException(e);
             }
         };
@@ -61,7 +57,6 @@ public class Problem1 {
         Function<List<Long>, Long> top3 = param -> param.stream()
                 .sorted(Comparator.reverseOrder())
                 .limit(3)
-                //.peek(System.out::println)
                 .reduce(0L, (a, b) -> a + b);
 
         Consumer<String> showSolution1 = param -> {
@@ -73,6 +68,8 @@ public class Problem1 {
             Long result = loadFile.andThen(group).andThen(top3).apply(param);
             System.out.println("Result2: " + result);
         };
+
+        System.out.println( "Day 1: Calorie Counting" );
 
         System.out.println("Sample");
         String param = "problem1-input-sample.txt";
