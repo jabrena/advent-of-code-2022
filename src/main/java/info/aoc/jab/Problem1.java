@@ -1,17 +1,13 @@
 package info.aoc.jab;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,39 +20,24 @@ public class Problem1 {
 
     private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
 
-    public static void main(String[] args) {
-        Function<String, List<String>> loadFile = fileName -> {
-            try {
-                ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-                File file = new File(classloader.getResource(fileName).toURI());
-                return Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
-            } catch (URISyntaxException | IOException e) {
-                throw new RuntimeException(e);
-            }
-        };
+    private static final String ELF_SEPARATOR = System.lineSeparator() + System.lineSeparator();
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
+    public static void main(String[] args) {
         /**
          * Create a list of elements.
          * The source has a list of numbers, and it is necessary
          * to group and sum them; the rule is a separator that appear in the file
          */
-        //TODO Refactor with a better Java Stream usage.
-        Function<List<String>, List<Long>> group = list -> {
-            AtomicLong counter = new AtomicLong(0);
-            List<Long> groups = new ArrayList<>();
-            list
-                .stream()
-                .forEach(x -> {
-                    if (x.length() != 0) {
-                        counter.addAndGet(Long.parseLong(x));
-                    } else {
-                        groups.add(counter.get());
-                        counter.set(0);
-                    }
-                });
-
-            return groups;
-        };
+        Function<String, List<Long>> group = file ->
+            Arrays
+                .stream(file.split(ELF_SEPARATOR))
+                .map(elf -> elf.split(LINE_SEPARATOR))
+                .map(Arrays::stream)
+                .map(elf -> elf.mapToLong(Long::parseLong))
+                .mapToLong(LongStream::sum)
+                .boxed()
+                .collect(Collectors.toList());
 
         // @formatter:off
         BiFunction<List<Long>, Integer, Long> top = (param, limit) -> param.stream()
@@ -66,7 +47,8 @@ public class Problem1 {
         // @formatter:on
 
         BiConsumer<String, Integer> showSolution = (file, limit) -> {
-            var groups = loadFile.andThen(group).apply(file);
+            var fileAsString = Utils.readFileToString.apply(file);
+            var groups = group.apply(fileAsString);
             var result = top.apply(groups, limit);
             logger.info("Result2: " + result);
         };
