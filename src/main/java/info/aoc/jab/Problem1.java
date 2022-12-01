@@ -2,11 +2,8 @@ package info.aoc.jab;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,32 +21,21 @@ public class Problem1 {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static void main(String[] args) {
-        /**
-         * Create a list of elements.
-         * The source has a list of numbers, and it is necessary
-         * to group and sum them; the rule is a separator that appear in the file
-         */
-        Function<String, List<Long>> processData = file ->
+        BiFunction<String, Integer, Long> processData = (file, limit) ->
             Arrays
                 .stream(file.split(ELF_SEPARATOR))
                 .map(elf -> elf.split(LINE_SEPARATOR))
                 .map(Arrays::stream)
-                .map(elf -> elf.mapToLong(Long::parseLong))
+                .map(line -> line.mapToLong(Long::parseLong))
                 .mapToLong(LongStream::sum)
                 .boxed()
-                .collect(Collectors.toList());
-
-        // @formatter:off
-        BiFunction<List<Long>, Integer, Long> extractTop = (param, limit) -> param.stream()
                 .sorted(Comparator.reverseOrder())
                 .limit(limit)
                 .reduce(0L, Long::sum);
-        // @formatter:on
 
         BiConsumer<String, Integer> showSolution = (file, limit) -> {
             var fileLoaded = Utils.readFileToString.apply(file);
-            var processedGroups = processData.apply(fileLoaded);
-            var result = extractTop.apply(processedGroups, limit);
+            var result = processData.apply(fileLoaded, limit);
             logger.info("Result2: " + result);
         };
 
