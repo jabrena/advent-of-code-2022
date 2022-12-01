@@ -24,10 +24,9 @@ public class Problem1 {
         BiFunction<String, Integer, Long> processData = (file, limit) ->
             Arrays
                 .stream(file.split(GROUP_SEPARATOR))
-                .map(elf -> elf.split(LINE_SEPARATOR))
-                .map(Arrays::stream)
-                .map(line -> line.mapToLong(Long::parseLong))
-                .map(LongStream::sum)
+                .map(elf -> Arrays.stream(elf.split(LINE_SEPARATOR)))
+                .flatMapToLong(x -> LongStream.of(x.mapToLong(Long::parseLong).sum()))
+                .boxed()
                 .sorted(Comparator.reverseOrder())
                 .limit(limit)
                 .reduce(0L, Long::sum);
