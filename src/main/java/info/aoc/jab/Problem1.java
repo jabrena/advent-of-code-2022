@@ -26,6 +26,7 @@ public class Problem1 {
     private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
 
     public static void main(String[] args) {
+
         Function<String, List<String>> loadFile = fileName -> {
             try {
                 ClassLoader classloader = Thread.currentThread().getContextClassLoader();
@@ -36,6 +37,11 @@ public class Problem1 {
             }
         };
 
+        /**
+         * Create a list of elements.
+         * The source has a list of numbers, and it is necessary
+         * to group and sum them; the rule is a separator that appear in the file
+         */
         //TODO Refactor with a better Java Stream usage.
         Function<List<String>, List<Long>> group = list -> {
             AtomicLong counter = new AtomicLong(0);
