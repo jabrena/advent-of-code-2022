@@ -32,7 +32,7 @@ public class Problem1 {
                 .reduce(0L, Long::sum);
 
         BiConsumer<String, Integer> showSolution = (fileName, limit) -> {
-            var fileLoaded = Utils.readFileToString.apply(fileName);
+            var fileLoaded = Utils.readFileToString(fileName);
             var result = processData.apply(fileLoaded, limit);
             logger.info("Result2: " + result);
         };
