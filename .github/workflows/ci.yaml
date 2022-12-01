@@ -2,6 +2,7 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 jobs:
@@ -18,6 +19,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
-      - name: Build image & push
+      - name: Run solutions
         run: |
           mvn compile exec:java -Dexec.mainClass="info.aoc.jab.Problem1"
