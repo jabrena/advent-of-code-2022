@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Solution for AOC 2022, Day 1
@@ -19,6 +22,8 @@ import java.util.function.Function;
  *
  */
 public class Problem1 {
+
+    private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
 
     public static void main(String[] args) {
         Function<String, List<String>> loadFile = fileName -> {
@@ -35,7 +40,8 @@ public class Problem1 {
         Function<List<String>, List<Long>> group = list -> {
             AtomicLong counter = new AtomicLong(0);
             List<Long> groups = new ArrayList<>();
-            list.stream()
+            list
+                .stream()
                 .forEach(x -> {
                     if (x.length() != 0) {
                         counter.addAndGet(Long.parseLong(x));
@@ -55,28 +61,22 @@ public class Problem1 {
                 .reduce(0L, Long::sum);
         // @formatter:on
 
-        Consumer<String> showSolution1 = param -> {
-            var groups = loadFile.andThen(group).apply(param);
-            var result = top.apply(groups, 1);
-            System.out.println("Result1: " + result);
+        BiConsumer<String, Integer> showSolution = (file, limit) -> {
+            var groups = loadFile.andThen(group).apply(file);
+            var result = top.apply(groups, limit);
+            logger.info("Result2: " + result);
         };
 
-        Consumer<String> showSolution2 = param -> {
-            var groups = loadFile.andThen(group).apply(param);
-            var result = top.apply(groups, 3);
-            System.out.println("Result2: " + result);
-        };
+        logger.info("Day 1: Calorie Counting");
 
-        System.out.println("Day 1: Calorie Counting");
+        logger.info("Sample");
+        String file = "problem1-input-sample.txt";
+        showSolution.accept(file, 1);
+        showSolution.accept(file, 3);
 
-        System.out.println("Sample");
-        String param = "problem1-input-sample.txt";
-        showSolution1.accept(param);
-        showSolution2.accept(param);
-
-        System.out.println("Problem sample");
-        String param2 = "problem1-input.txt";
-        showSolution1.accept(param2);
-        showSolution2.accept(param2);
+        logger.info("Problem");
+        String file2 = "problem1-input.txt";
+        showSolution.accept(file2, 1);
+        showSolution.accept(file2, 3);
     }
 }
