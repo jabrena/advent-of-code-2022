@@ -17,24 +17,23 @@ public class Problem1 {
 
     private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
 
-    private static final String ELF_SEPARATOR = System.lineSeparator() + System.lineSeparator();
+    private static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     public static void main(String[] args) {
         BiFunction<String, Integer, Long> processData = (file, limit) ->
             Arrays
-                .stream(file.split(ELF_SEPARATOR))
+                .stream(file.split(GROUP_SEPARATOR))
                 .map(elf -> elf.split(LINE_SEPARATOR))
                 .map(Arrays::stream)
                 .map(line -> line.mapToLong(Long::parseLong))
-                .mapToLong(LongStream::sum)
-                .boxed()
+                .map(LongStream::sum)
                 .sorted(Comparator.reverseOrder())
                 .limit(limit)
                 .reduce(0L, Long::sum);
 
-        BiConsumer<String, Integer> showSolution = (file, limit) -> {
-            var fileLoaded = Utils.readFileToString.apply(file);
+        BiConsumer<String, Integer> showSolution = (fileName, limit) -> {
+            var fileLoaded = Utils.readFileToString.apply(fileName);
             var result = processData.apply(fileLoaded, limit);
             logger.info("Result2: " + result);
         };
