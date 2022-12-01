@@ -21,4 +21,4 @@ jobs:
 
       - name: Run solutions for AOC 2022
         run: |
-          mvn compile exec:java -Dexec.mainClass="info.aoc.jab.Problem1"
+          mvn compile --batch-mode --no-transfer-progress exec:java -Dexec.mainClass="info.aoc.jab.Problem1"
