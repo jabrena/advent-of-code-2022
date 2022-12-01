@@ -50,6 +50,7 @@ public class Problem1 {
         };
 
         // @formatter:off
+        //TODO try to minimize duplication
         Function<List<Long>, Long> top1 = param -> param.stream()
                 .sorted(Comparator.reverseOrder())
                 .limit(1)
