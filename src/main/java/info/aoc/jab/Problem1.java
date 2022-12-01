@@ -50,25 +50,21 @@ public class Problem1 {
         };
 
         // @formatter:off
-        //TODO try to minimize duplication
-        Function<List<Long>, Long> top1 = param -> param.stream()
+        BiFunction<List<Long>, Integer, Long> top = (param, limit) -> param.stream()
                 .sorted(Comparator.reverseOrder())
-                .limit(1)
-                .reduce(0L, Long::sum);
-
-        Function<List<Long>, Long> top3 = (param) -> param.stream()
-                .sorted(Comparator.reverseOrder())
-                .limit(3)
+                .limit(limit)
                 .reduce(0L, Long::sum);
         // @formatter:on
 
         Consumer<String> showSolution1 = param -> {
-            Long result = loadFile.andThen(group).andThen(top1).apply(param);
+            var groups = loadFile.andThen(group).apply(param);
+            var result = top.apply(groups, 1);
             System.out.println("Result1: " + result);
         };
 
         Consumer<String> showSolution2 = param -> {
-            Long result = loadFile.andThen(group).andThen(top3).apply(param);
+            var groups = loadFile.andThen(group).apply(param);
+            var result = top.apply(groups, 3);
             System.out.println("Result2: " + result);
         };
 
