@@ -35,8 +35,7 @@ public class Problem1 {
         Function<List<String>, List<Long>> group = list -> {
             AtomicLong counter = new AtomicLong(0);
             List<Long> groups = new ArrayList<>();
-            list
-                .stream()
+            list.stream()
                 .forEach(x -> {
                     if (x.length() != 0) {
                         counter.addAndGet(Long.parseLong(x));
