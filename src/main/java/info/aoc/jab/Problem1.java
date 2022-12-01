@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +25,6 @@ public class Problem1 {
     private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
 
     public static void main(String[] args) {
-
         Function<String, List<String>> loadFile = fileName -> {
             try {
                 ClassLoader classloader = Thread.currentThread().getContextClassLoader();
