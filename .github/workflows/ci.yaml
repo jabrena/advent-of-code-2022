@@ -19,6 +19,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
-      - name: Run solutions
+      - name: Run solutions for AOC 2022
         run: |
           mvn compile exec:java -Dexec.mainClass="info.aoc.jab.Problem1"

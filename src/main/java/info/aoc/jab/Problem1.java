@@ -14,7 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
- * Hello world!
+ * Solution for AOC 2022, Day 1
+ * https://adventofcode.com/2022/day/1
  *
  */
 public class Problem1 {
