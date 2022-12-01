@@ -29,7 +29,7 @@ public class Problem1 {
          * The source has a list of numbers, and it is necessary
          * to group and sum them; the rule is a separator that appear in the file
          */
-        Function<String, List<Long>> group = file ->
+        Function<String, List<Long>> processData = file ->
             Arrays
                 .stream(file.split(ELF_SEPARATOR))
                 .map(elf -> elf.split(LINE_SEPARATOR))
@@ -40,16 +40,16 @@ public class Problem1 {
                 .collect(Collectors.toList());
 
         // @formatter:off
-        BiFunction<List<Long>, Integer, Long> top = (param, limit) -> param.stream()
+        BiFunction<List<Long>, Integer, Long> extractTop = (param, limit) -> param.stream()
                 .sorted(Comparator.reverseOrder())
                 .limit(limit)
                 .reduce(0L, Long::sum);
         // @formatter:on
 
         BiConsumer<String, Integer> showSolution = (file, limit) -> {
-            var fileAsString = Utils.readFileToString.apply(file);
-            var groups = group.apply(fileAsString);
-            var result = top.apply(groups, limit);
+            var fileLoaded = Utils.readFileToString.apply(file);
+            var processedGroups = processData.apply(fileLoaded);
+            var result = extractTop.apply(processedGroups, limit);
             logger.info("Result2: " + result);
         };
 
