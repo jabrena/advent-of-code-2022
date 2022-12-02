@@ -1,5 +1,6 @@
-package info.aoc.jab;
+package jab.aoc.day1;
 
+import jab.aoc.Utils;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.BiConsumer;
@@ -13,9 +14,9 @@ import org.slf4j.LoggerFactory;
  * https://adventofcode.com/2022/day/1
  *
  */
-public class Problem1 {
+public class Day1 {
 
-    private static final Logger logger = LoggerFactory.getLogger(Problem1.class);
+    private static final Logger logger = LoggerFactory.getLogger(Day1.class);
 
     private static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
     private static final String LINE_SEPARATOR = System.lineSeparator();
