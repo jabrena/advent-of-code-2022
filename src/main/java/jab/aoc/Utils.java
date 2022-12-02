@@ -1,4 +1,4 @@
-package info.aoc.jab;
+package jab.aoc;
 
 import java.io.File;
 import java.io.IOException;
@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.function.Function;
 
 public class Utils {
 
