@@ -18,7 +18,7 @@ public class Day2 {
     private static String SEPARATOR = " ";
 
     public static void main(String[] args) {
-        Function<List<String>, Integer> getResult1 = fileContent -> {
+        Function<List<String>, Integer> getPart1Result = fileContent -> {
             return fileContent
                 .stream()
                 .map(line -> line.split(SEPARATOR))
@@ -27,7 +27,7 @@ public class Day2 {
                 .reduce(0, Integer::sum);
         };
 
-        Function<List<String>, Integer> getResult2 = fileContent -> {
+        Function<List<String>, Integer> getPart2Result = fileContent -> {
             return fileContent
                 .stream()
                 .map(line -> line.split(SEPARATOR))
@@ -42,13 +42,11 @@ public class Day2 {
         var content2 = Utils.loadFileToList("day2/day2-input.txt");
 
         logger.info("Sample");
-        logger.info("Result: " + getResult1.apply(content));
-        logger.info("Result: " + getResult2.apply(content));
+        logger.info("Result: " + getPart1Result.apply(content));
+        logger.info("Result: " + getPart2Result.apply(content));
 
         logger.info("Problem");
-        logger.info("Result: " + getResult1.apply(content2));
-        logger.info("Result: " + getResult2.apply(content2));
-        //TODO How to enable bean validation on Records?
-        //getResult1.apply(Utils.loadFileToList("day2/problem2-input-sample-corrupted.txt"));
+        logger.info("Result: " + getPart1Result.apply(content2));
+        logger.info("Result: " + getPart2Result.apply(content2));
     }
 }
