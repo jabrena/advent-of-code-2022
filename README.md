@@ -7,6 +7,7 @@ Solutions for advent-of-code-2022
 ```
 mvn prettier:write
 mvn compile exec:java -Dexec.mainClass="info.aoc.jab.Problem1"
+mvn compile exec:java -Dexec.mainClass="info.aoc.jab.Problem2"
 ```
 
 ## References
