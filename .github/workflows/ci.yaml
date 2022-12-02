@@ -21,4 +21,4 @@ jobs:
 
       - name: Run solutions for AOC 2022
         run: |
-          mvn test
+          mvn --batch-mode --no-transfer-progress test
