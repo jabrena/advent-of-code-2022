@@ -38,8 +38,8 @@ public class Day2 {
 
         logger.info("Day 2: Rock Paper Scissors");
 
-        var content = Utils.loadFileToList("day2/problem2-input-sample.txt");
-        var content2 = Utils.loadFileToList("day2/problem2-input.txt");
+        var content = Utils.loadFileToList("day2/day2-input-sample.txt");
+        var content2 = Utils.loadFileToList("day2/day2-input.txt");
 
         logger.info("Sample");
         logger.info("Result: " + getResult1.apply(content));

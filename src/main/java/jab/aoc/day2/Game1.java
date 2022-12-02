@@ -18,13 +18,18 @@ package jab.aoc.day2;
  * @param column2 column1
  */
 record Game1(Column1 column1, Column2 column2) {
-    private Integer getShapeScore() {
+    /**
+     * Shape you selected (1 for Rock, 2 for Paper, and 3 for Scissors)
+     *
+     * @return ShapeScores
+     */
+    private ShapeScores getShapeScore() {
         if (column2() == Column2.ROCK) {
-            return 1;
+            return ShapeScores.ONE;
         } else if (column2() == Column2.PAPER) {
-            return 2;
+            return ShapeScores.TWO;
         } else if (column2() == Column2.SCISSOR) {
-            return 3;
+            return ShapeScores.THREE;
         } else {
             throw new RuntimeException("Option not identified");
         }
@@ -37,40 +42,31 @@ record Game1(Column1 column1, Column2 column2) {
      *
      * @return return
      */
-    private Integer getRoundOutcome() {
+    private GameOutcomes getRoundOutcome() {
         if (column1() == Column1.ROCK && column2() == Column2.ROCK) {
-            //Draw
-            return 3;
+            return GameOutcomes.DRAW;
         } else if (column1() == Column1.ROCK && column2() == Column2.PAPER) {
-            //Win
-            return 6;
+            return GameOutcomes.WIN;
         } else if (column1() == Column1.ROCK && column2() == Column2.SCISSOR) {
-            //Lost
-            return 0;
+            return GameOutcomes.LOST;
         } else if (column1() == Column1.PAPER && column2() == Column2.ROCK) {
-            //Lost
-            return 0;
+            return GameOutcomes.LOST;
         } else if (column1() == Column1.PAPER && column2() == Column2.PAPER) {
-            //Draw
-            return 3;
+            return GameOutcomes.DRAW;
         } else if (column1() == Column1.PAPER && column2() == Column2.SCISSOR) {
-            //Win
-            return 6;
+            return GameOutcomes.WIN;
         } else if (column1() == Column1.SCISSOR && column2() == Column2.ROCK) {
-            //Win
-            return 6;
+            return GameOutcomes.WIN;
         } else if (column1() == Column1.SCISSOR && column2() == Column2.PAPER) {
-            //Lost
-            return 0;
+            return GameOutcomes.LOST;
         } else if (column1() == Column1.SCISSOR && column2() == Column2.SCISSOR) {
-            //Draw
-            return 3;
+            return GameOutcomes.DRAW;
         } else {
             throw new RuntimeException("Option not identified");
         }
     }
 
     public Integer getScore() {
-        return getShapeScore() + getRoundOutcome();
+        return getShapeScore().getValue() + getRoundOutcome().getValue();
     }
 }

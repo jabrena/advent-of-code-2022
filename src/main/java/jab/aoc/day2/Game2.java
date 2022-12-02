@@ -36,33 +36,33 @@ record Game2(Column1 column1, Column2 column2) {
         //Lost
         if (column2() == Column2.fromValue("X") && column1() == Column1.ROCK) {
             //Scissor
-            return 3;
+            return ShapeScores.THREE.getValue() + GameOutcomes.LOST.getValue();
         } else if (column2() == Column2.fromValue("X") && column1() == Column1.PAPER) {
             //Rock
-            return 1;
+            return ShapeScores.ONE.getValue() + GameOutcomes.LOST.getValue();
         } else if (column2() == Column2.fromValue("X") && column1() == Column1.SCISSOR) {
             //Paper
-            return 2;
-            //Draw
+            return ShapeScores.TWO.getValue() + GameOutcomes.LOST.getValue();
+        //Draw
         } else if (column2() == Column2.fromValue("Y") && column1() == Column1.ROCK) {
             //Rock
-            return 1 + 3;
+            return ShapeScores.ONE.getValue() + GameOutcomes.DRAW.getValue();
         } else if (column2() == Column2.fromValue("Y") && column1() == Column1.PAPER) {
             //Paper
-            return 2 + 3;
+            return ShapeScores.TWO.getValue() + GameOutcomes.DRAW.getValue();
         } else if (column2() == Column2.fromValue("Y") && column1() == Column1.SCISSOR) {
             //Scissor
-            return 3 + 3;
-            //Win
+            return ShapeScores.THREE.getValue() + GameOutcomes.DRAW.getValue();
+        //Win
         } else if (column2() == Column2.fromValue("Z") && column1() == Column1.ROCK) {
             //Paper
-            return 2 + 6;
+            return ShapeScores.TWO.getValue() + GameOutcomes.WIN.getValue();
         } else if (column2() == Column2.fromValue("Z") && column1() == Column1.PAPER) {
             //Scissor
-            return 3 + 6;
+            return ShapeScores.THREE.getValue() + GameOutcomes.WIN.getValue();
         } else if (column2() == Column2.fromValue("Z") && column1() == Column1.SCISSOR) {
             //Rock
-            return 1 + 6;
+            return ShapeScores.ONE.getValue() + GameOutcomes.WIN.getValue();
         } else {
             throw new RuntimeException("Option not identified");
         }

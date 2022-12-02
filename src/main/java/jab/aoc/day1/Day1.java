@@ -41,12 +41,12 @@ public class Day1 {
         logger.info("Day 1: Calorie Counting");
 
         logger.info("Sample");
-        String file = "day1/problem1-input-sample.txt";
+        String file = "day1/day1-input-sample.txt";
         showSolution.accept(file, 1);
         showSolution.accept(file, 3);
 
         logger.info("Problem");
-        String file2 = "day1/problem1-input.txt";
+        String file2 = "day1/day1-input.txt";
         showSolution.accept(file2, 1);
         showSolution.accept(file2, 3);
     }
