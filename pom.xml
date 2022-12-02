@@ -75,9 +75,7 @@
                         <id>enforce</id>
                         <configuration>
                             <rules>
-                                <!--
                                 <dependencyConvergence/>
-                                -->
                                 <banDuplicatePomDependencyVersions/>
                                 <requireMavenVersion>
                                     <version>3.6.3</version>
