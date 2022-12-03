@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 public class Day3 {
 
-    Function<String, Integer> getPriority = param -> {
+    private Function<String, Integer> getPriority = param -> {
         final String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         return alphabet.indexOf(param) + 1;
     };
 
     // @formatter:off
-    Function<String, Set<String>> getChars = str ->
+    private Function<String, Set<String>> getChars = str ->
             Arrays.stream(str.split("(?!^)")).collect(Collectors.toSet());
 
     // @formatter:on
