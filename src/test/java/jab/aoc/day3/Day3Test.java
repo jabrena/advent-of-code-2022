@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 class Day3Test {
 
-    /*
     @Test
     public void given_sampleData_when_execute_day3_getPart1Solution_then_expected_result() {
         //Given
@@ -32,8 +31,6 @@ class Day3Test {
         //Then
         then(result).isEqualTo(7746);
     }
-
-     */
 
     @Test
     public void given_sampleData_when_execute_day3_getPart2Solution_then_expected_result() {
