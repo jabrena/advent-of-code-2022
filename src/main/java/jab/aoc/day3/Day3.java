@@ -20,7 +20,6 @@ public class Day3 {
     // @formatter:off
     Function<String, Set<String>> getChars = str ->
             Arrays.stream(str.split("(?!^)")).collect(Collectors.toSet());
-
     // @formatter:on
 
     public Long getPart1Result(String fileName) {
