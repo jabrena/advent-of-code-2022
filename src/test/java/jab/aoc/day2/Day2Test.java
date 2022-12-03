@@ -10,7 +10,6 @@ class Day2Test {
     public void given_sampleData_when_execute_day2_getPart1Solution_then_expected_result() {
         //Given
         String fileName = "day2/day2-input-sample.txt";
-        String fileName2 = "day2/day2-input.txt";
 
         //When
         Day2 day2 = new Day2();
