@@ -69,15 +69,15 @@ public class Day4 {
         /**
          * Detect if 2 Arrays Overlaps
          */
-        BiFunction<Integer[], Integer[], Integer> overlap = (arr1, arr2) -> {
+        BiFunction<Integer[], Integer[], Boolean> overlap = (arr1, arr2) -> {
             HashSet<Integer> set2 = new HashSet<>();
             set2.addAll(Arrays.asList(arr1));
             set2.retainAll(Arrays.asList(arr2));
 
             if (set2.size() > 0) {
-                return 1;
+                return true;
             }
-            return 0;
+            return false;
         };
 
         return Utils
@@ -85,7 +85,7 @@ public class Day4 {
             .stream()
             .map(str -> str.split(","))
             .map(arr -> overlap.apply(toIntArr.apply(arr[0]), toIntArr.apply(arr[1])))
-            .filter(value -> value > 0)
+            .filter(value -> value)
             .count();
     }
 }
