@@ -3,18 +3,10 @@ package jab.aoc.day4;
 import jab.aoc.Utils;
 import java.util.HashSet;
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class Day4 {
-
-    /**
-     * Detect if one list is a Subset of another
-     */
-    private BiFunction<List<Integer>, List<Integer>, Boolean> isSubset = (list1, list2) -> {
-        return list1.containsAll(list2);
-    };
 
     // @formatter:off
     private Function<String, List<Integer>> toListOfIntegers = arr -> {
@@ -36,9 +28,9 @@ public class Day4 {
 
     public Long getPart1Result(String fileName) {
         // @formatter:off
-        Function<Tuple, Boolean> areSubset = tuple -> {
-            if (isSubset.apply(tuple.part1(), tuple.part2())
-                || isSubset.apply(tuple.part2(), tuple.part1())) {
+        Function<Tuple, Boolean> detectSubsets = tuple -> {
+            if (tuple.part1().containsAll(tuple.part2())
+                || tuple.part2().containsAll(tuple.part1())) {
                 return true;
             }
             return false;
@@ -47,7 +39,7 @@ public class Day4 {
         return Utils.loadFileToList(fileName)
                 .stream()
                 .map(toTuple)
-                .map(areSubset)
+                .map(detectSubsets)
                 .filter(value -> value)
                 .count();
         // @formatter:on
@@ -57,10 +49,10 @@ public class Day4 {
         /**
          * Detect if 2 Arrays Overlaps
          */
-        BiFunction<List<Integer>, List<Integer>, Boolean> overlap = (list1, list2) -> {
+        Function<Tuple, Boolean> detectOverlap = tuple -> {
             HashSet<Integer> set2 = new HashSet<>();
-            set2.addAll(list1);
-            set2.retainAll(list2);
+            set2.addAll(tuple.part1());
+            set2.retainAll(tuple.part2());
 
             if (set2.size() > 0) {
                 return true;
@@ -68,12 +60,14 @@ public class Day4 {
             return false;
         };
 
+        // @formatter:off
         return Utils
-            .loadFileToList(fileName)
-            .stream()
-            .map(toTuple)
-            .map(tuple -> overlap.apply(tuple.part1(), tuple.part2()))
-            .filter(value -> value)
-            .count();
+                .loadFileToList(fileName)
+                .stream()
+                .map(toTuple)
+                .map(detectOverlap)
+                .filter(value -> value)
+                .count();
+        // @formatter:on
     }
 }
