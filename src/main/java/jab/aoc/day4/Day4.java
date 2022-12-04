@@ -50,7 +50,6 @@ public class Day4 {
                 .map(areSubset)
                 .filter(value -> value)
                 .count();
-    
         // @formatter:on
     }
 
