@@ -45,9 +45,14 @@ public class Day4 {
 
     // @formatter:on
 
-    public Long getPart1Result(String fileName) {
-        record Tuple(Integer[] part1, Integer[] part2) {}
+    record Tuple(Integer[] part1, Integer[] part2) {}
 
+    Function<String, Tuple> toTuple = param -> {
+        String[] arr = param.split(",");
+        return new Tuple(toIntArr.apply(arr[0]), toIntArr.apply(arr[1]));
+    };
+
+    public Long getPart1Result(String fileName) {
         Function<Tuple, Boolean> areSubset = tuple -> {
             if (isSubset(tuple.part1(), tuple.part2()) || isSubset(tuple.part2(), tuple.part1())) {
                 return true;
@@ -55,14 +60,14 @@ public class Day4 {
             return false;
         };
 
-        return Utils
-            .loadFileToList(fileName)
-            .stream()
-            .map(str -> str.split(","))
-            .map(arr -> new Tuple(toIntArr.apply(arr[0]), toIntArr.apply(arr[1])))
-            .map(areSubset)
-            .filter(value -> value)
-            .count();
+        // @formatter:off
+        return Utils.loadFileToList(fileName)
+                .stream()
+                .map(toTuple)
+                .map(areSubset)
+                .filter(value -> value)
+                .count();
+        // @formatter:on
     }
 
     public Long getPart2Result(String fileName) {
@@ -83,8 +88,8 @@ public class Day4 {
         return Utils
             .loadFileToList(fileName)
             .stream()
-            .map(str -> str.split(","))
-            .map(arr -> overlap.apply(toIntArr.apply(arr[0]), toIntArr.apply(arr[1])))
+            .map(toTuple)
+            .map(tuple -> overlap.apply(tuple.part1(), tuple.part2()))
             .filter(value -> value)
             .count();
     }
