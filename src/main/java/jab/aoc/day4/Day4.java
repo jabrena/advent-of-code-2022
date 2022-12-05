@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
+/**
+ * Solution for AOC 2022, Day 4
+ * https://adventofcode.com/2022/day/4
+ *
+ */
 public class Day4 {
 
     // @formatter:off

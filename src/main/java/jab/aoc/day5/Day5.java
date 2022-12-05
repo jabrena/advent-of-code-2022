@@ -1,7 +1,7 @@
 package jab.aoc.day5;
 
-import static jab.aoc.Utils.GROUP_SEPARATOR;
-import static jab.aoc.Utils.LINE_SEPARATOR;
+import static jab.aoc.Utils.GROUP_SEPARATOR_PATTERN;
+import static jab.aoc.Utils.LINE_SEPARATOR_PATTERN;
 
 import jab.aoc.Utils;
 import java.util.ArrayDeque;
@@ -14,11 +14,19 @@ import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
+/**
+ * Solution for AOC 2022, Day 5
+ * https://adventofcode.com/2022/day/5
+ *
+ */
 public class Day5 {
+
+    private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
 
     // @formatter:off
     private record Command(Integer quantity, Integer from, Integer to) {
-        public static Command fromArray(String[] arr) {
+        public static Command fromString(String str) {
+            var arr = SPACE_PATTERN.split(str);
             return new Command(
                     Integer.parseInt(arr[1]),
                     Integer.parseInt(arr[3]) - 1,
@@ -27,18 +35,17 @@ public class Day5 {
     }
 
     private Function<String, List<Command>> recreateCommands = param -> Arrays
-        .stream(param.split(LINE_SEPARATOR))
-        .map(str -> str.split(" "))
-        .map(Command::fromArray)
+        .stream(LINE_SEPARATOR_PATTERN.split(param))
+        .map(Command::fromString)
         .toList();
     // @formatter:on
 
-    private static final Pattern pattern = Pattern.compile("(?<=\\G.{4})");
+    private static final Pattern pattern2 = Pattern.compile("(?<=\\G.{4})");
 
     private Function<String, List<Deque<String>>> recreateStacks = param -> {
         //Create LIFO Queue
         var numberOfStacks = Arrays
-            .stream(param.split(LINE_SEPARATOR))
+            .stream(LINE_SEPARATOR_PATTERN.split(param))
             .filter(str -> !str.contains("["))
             .map(str -> str.substring(str.length() - 1))
             .map(Integer::valueOf)
@@ -52,10 +59,10 @@ public class Day5 {
 
         //Populate LIFO Queue
         Arrays
-            .stream(param.split(LINE_SEPARATOR))
+            .stream(LINE_SEPARATOR_PATTERN.split(param))
             .filter(str -> str.contains("["))
             .forEach(str -> {
-                String[] groups = pattern.split(str);
+                String[] groups = pattern2.split(str);
                 AtomicInteger counter = new AtomicInteger(0);
                 Arrays
                     .stream(groups)
@@ -80,7 +87,7 @@ public class Day5 {
 
     private Function<String, Tuple> recreateStateFromFile = fileName -> {
         var fileLoaded = Utils.readFileToString(fileName);
-        var parts = fileLoaded.split(GROUP_SEPARATOR);
+        var parts = GROUP_SEPARATOR_PATTERN.split(fileLoaded);
 
         var stacks = recreateStacks.apply(parts[0]);
         var commands = recreateCommands.apply(parts[1]);
