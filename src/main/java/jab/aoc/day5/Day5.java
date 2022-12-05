@@ -53,7 +53,7 @@ public class Day5 {
         Arrays
             .stream(param.split(LINE_SEPARATOR))
             .filter(str -> str.contains("["))
-            .map(str -> {
+            .forEach(str -> {
                 String[] groups = str.split("(?<=\\G.{" + 4 + "})");
                 AtomicInteger counter = new AtomicInteger(0);
                 Arrays
@@ -64,9 +64,7 @@ public class Day5 {
                         }
                         counter.incrementAndGet();
                     });
-                return str;
-            })
-            .toList();
+            });
 
         return stacks;
     };
