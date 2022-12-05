@@ -14,7 +14,7 @@ Solutions for advent-of-code-2022
 
 ```
 mvn prettier:write
-mvn test
+mvn verify
 ```
 
 ## References
