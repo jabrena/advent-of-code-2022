@@ -8,6 +8,8 @@ Solutions for advent-of-code-2022
 - [Day 2: Rock Paper Scissors](src/main/java/jab/aoc/day2)
 - [Day 3: Rucksack Reorganization](src/main/java/jab/aoc/day3)
 - [Day 4: Camp Cleanup](src/main/java/jab/aoc/day4)
+- [Day 5: Supply Stacks](src/main/java/jab/aoc/day5)
+
 
 ```
 mvn prettier:write
