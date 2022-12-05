@@ -47,7 +47,7 @@ public class Day5 {
             stacks.add(new ArrayDeque<>());
         }
 
-        //Populate Create LIFO Queue
+        //Populate LIFO Queue
         Arrays
             .stream(param.split(LINE_SEPARATOR))
             .filter(str -> str.contains("["))
