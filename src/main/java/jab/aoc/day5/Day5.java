@@ -11,6 +11,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
 public class Day5 {
@@ -32,6 +33,8 @@ public class Day5 {
         .toList();
     // @formatter:on
 
+    private static final Pattern pattern = Pattern.compile("(?<=\\G.{4})");
+
     private Function<String, List<Deque<String>>> recreateStacks = param -> {
         //Create LIFO Queue
         var numberOfStacks = Arrays
@@ -52,7 +55,7 @@ public class Day5 {
             .stream(param.split(LINE_SEPARATOR))
             .filter(str -> str.contains("["))
             .forEach(str -> {
-                String[] groups = str.split("(?<=\\G.{" + 4 + "})");
+                String[] groups = pattern.split(str);
                 AtomicInteger counter = new AtomicInteger(0);
                 Arrays
                     .stream(groups)
@@ -96,7 +99,7 @@ public class Day5 {
                     .rangeClosed(1, command.quantity())
                     .forEach(i -> {
                         String element = state.stacks().get(command.from()).pollFirst();
-                        state.stacks().get(command.to).addFirst(element);
+                        state.stacks().get(command.to()).addFirst(element);
                     })
             );
 
