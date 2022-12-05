@@ -67,7 +67,7 @@ public class Day5 {
             .filter(OPEN_PATTERN_FILTER)
             .forEach(str -> {
                 String[] groups = GROUPS_PATTERN.split(str);
-                //TODO Streams doesn´t offer the index
+                //Streams doesn´t offer the index
                 AtomicInteger counter = new AtomicInteger(0);
                 Arrays
                     .stream(groups)
@@ -136,7 +136,7 @@ public class Day5 {
                     .mapToObj(i -> state.stacks().get(command.from()).pollFirst())
                     .toList();
 
-                //TODO Streams doesn´t offer the index
+                //Streams doesn´t offer the index
                 for (int i = elementList.size(); i-- > 0;) {
                     state.stacks().get(command.to).addFirst(elementList.get(i));
                 }
