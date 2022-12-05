@@ -1,5 +1,8 @@
 package jab.aoc.day1;
 
+import static jab.aoc.Utils.GROUP_SEPARATOR;
+import static jab.aoc.Utils.LINE_SEPARATOR;
+
 import jab.aoc.Utils;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -11,9 +14,6 @@ import java.util.stream.LongStream;
  *
  */
 public class Day1 {
-
-    private static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     private Long processData(String fileName, Integer limit) {
         return Arrays

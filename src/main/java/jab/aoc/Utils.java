@@ -24,6 +24,9 @@ public class Utils {
         }
     }
 
+    public static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
+    public static final String LINE_SEPARATOR = System.lineSeparator();
+
     /**
      * Given a file name stored in resources
      * Return the file as a String
