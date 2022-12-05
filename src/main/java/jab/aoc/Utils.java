@@ -7,6 +7,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Utils {
 
@@ -24,8 +25,11 @@ public class Utils {
         }
     }
 
-    public static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
-    public static final String LINE_SEPARATOR = System.lineSeparator();
+    private static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
+    public static final Pattern GROUP_SEPARATOR_PATTERN = Pattern.compile(GROUP_SEPARATOR);
+
+    private static final String LINE_SEPARATOR = System.lineSeparator();
+    public static final Pattern LINE_SEPARATOR_PATTERN = Pattern.compile(LINE_SEPARATOR);
 
     /**
      * Given a file name stored in resources

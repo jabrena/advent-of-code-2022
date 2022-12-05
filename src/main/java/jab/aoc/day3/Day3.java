@@ -10,6 +10,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+/**
+ * Solution for AOC 2022, Day 3
+ * https://adventofcode.com/2022/day/3
+ *
+ */
 public class Day3 {
 
     private Function<String, Integer> getPriority = param -> {
