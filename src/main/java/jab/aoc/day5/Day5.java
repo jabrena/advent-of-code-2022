@@ -25,13 +25,11 @@ public class Day5 {
         }
     }
 
-    private Function<String, List<Command>> recreateCommands = param -> {
-        return Arrays
-            .stream(param.split(LINE_SEPARATOR))
-            .map(str -> str.split(" "))
-            .map(Command::fromArray)
-            .toList();
-    };
+    private Function<String, List<Command>> recreateCommands = param -> Arrays
+        .stream(param.split(LINE_SEPARATOR))
+        .map(str -> str.split(" "))
+        .map(Command::fromArray)
+        .toList();
     // @formatter:on
 
     private Function<String, List<Deque<String>>> recreateStacks = param -> {
@@ -93,7 +91,6 @@ public class Day5 {
         //Apply commands over the stacks
         state
             .commands()
-            .stream()
             .forEach(command ->
                 IntStream
                     .rangeClosed(1, command.quantity())
@@ -112,7 +109,6 @@ public class Day5 {
         //Apply commands over the stacks
         state
             .commands()
-            .stream()
             .forEach(command -> {
                 var elementList = IntStream
                     .rangeClosed(1, command.quantity())
