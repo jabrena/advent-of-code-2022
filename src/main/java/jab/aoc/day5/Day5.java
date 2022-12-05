@@ -11,6 +11,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.IntStream;
 
@@ -40,13 +41,16 @@ public class Day5 {
         .toList();
     // @formatter:on
 
-    private static final Pattern pattern2 = Pattern.compile("(?<=\\G.{4})");
+    private static final Pattern GROUPS_PATTERN = Pattern.compile("(?<=\\G.{4})");
+    private static final Pattern OPEN_PATTERN = Pattern.compile("\\[");
+    private static final Predicate<String> OPEN_PATTERN_FILTER = OPEN_PATTERN.asPredicate();
+    private static final Pattern CLOSE_PATTERN = Pattern.compile("]");
 
     private Function<String, List<Deque<String>>> recreateStacks = param -> {
         //Create LIFO Queue
         var numberOfStacks = Arrays
             .stream(LINE_SEPARATOR_PATTERN.split(param))
-            .filter(str -> !str.contains("["))
+            .filter(Predicate.not(OPEN_PATTERN_FILTER))
             .map(str -> str.substring(str.length() - 1))
             .map(Integer::valueOf)
             .findFirst()
@@ -60,14 +64,15 @@ public class Day5 {
         //Populate LIFO Queue
         Arrays
             .stream(LINE_SEPARATOR_PATTERN.split(param))
-            .filter(str -> str.contains("["))
+            .filter(OPEN_PATTERN_FILTER)
             .forEach(str -> {
-                String[] groups = pattern2.split(str);
+                String[] groups = GROUPS_PATTERN.split(str);
+                //TODO Streams doesn´t offer the index
                 AtomicInteger counter = new AtomicInteger(0);
                 Arrays
                     .stream(groups)
                     .forEach(part -> {
-                        if (part.contains("[")) {
+                        if (OPEN_PATTERN.matcher(part).find()) {
                             stacks.get(counter.get()).add(part);
                         }
                         counter.incrementAndGet();
@@ -80,7 +85,13 @@ public class Day5 {
     private Function<List<Deque<String>>, String> getResult = param ->
         param
             .stream()
-            .map(lifo -> lifo.pollFirst().replace("[", "").replace("]", "").trim())
+            .map(lifo -> {
+                //Mutable String
+                var tempValue = lifo.pollFirst();
+                tempValue = CLOSE_PATTERN.matcher(tempValue).replaceAll("");
+                tempValue = OPEN_PATTERN.matcher(tempValue).replaceAll("");
+                return tempValue.trim();
+            })
             .reduce("", String::concat);
 
     private record Tuple(List<Deque<String>> stacks, List<Command> commands) {}
