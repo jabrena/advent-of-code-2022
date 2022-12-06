@@ -6,8 +6,13 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Utils {
 
@@ -43,4 +48,16 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+    public static final Pattern STRING_SPLIT_PATTERN = Pattern.compile("(?!^)");
+
+    // @formatter:off
+    public static Function<String, Set<String>> getUniqueSetString = str ->
+        Arrays.stream(STRING_SPLIT_PATTERN.split(str))
+                .collect(Collectors.toUnmodifiableSet());
+
+    public static Function<String, HashSet<String>> getUniqueHashSetString = str ->
+        Arrays.stream(STRING_SPLIT_PATTERN.split(str))
+                .collect(Collectors.toCollection(HashSet::new));
+    // @formatter:on
 }

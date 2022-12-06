@@ -1,5 +1,6 @@
 package jab.aoc.day4;
 
+import jab.aoc.Day;
 import jab.aoc.Utils;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.stream.IntStream;
  * https://adventofcode.com/2022/day/4
  *
  */
-public class Day4 {
+public class Day4 implements Day {
 
     // @formatter:off
     private Function<String, List<Integer>> toListOfIntegers = arr -> {
@@ -31,6 +32,7 @@ public class Day4 {
         return new Tuple(toListOfIntegers.apply(arr[0]), toListOfIntegers.apply(arr[1]));
     };
 
+    @Override
     public Long getPart1Result(String fileName) {
         // @formatter:off
         Function<Tuple, Boolean> detectSubsets = tuple -> {
@@ -50,6 +52,7 @@ public class Day4 {
         // @formatter:on
     }
 
+    @Override
     public Long getPart2Result(String fileName) {
         /**
          * Detect if 2 Arrays Overlaps

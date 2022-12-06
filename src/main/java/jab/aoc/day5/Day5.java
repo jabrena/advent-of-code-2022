@@ -3,6 +3,7 @@ package jab.aoc.day5;
 import static jab.aoc.Utils.GROUP_SEPARATOR_PATTERN;
 import static jab.aoc.Utils.LINE_SEPARATOR_PATTERN;
 
+import jab.aoc.Day;
 import jab.aoc.Utils;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ import java.util.stream.IntStream;
  * https://adventofcode.com/2022/day/5
  *
  */
-public class Day5 {
+public class Day5 implements Day {
 
     private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
 
@@ -106,6 +107,7 @@ public class Day5 {
         return new Tuple(stacks, commands);
     };
 
+    @Override
     public String getPart1Result(String fileName) {
         Tuple state = recreateStateFromFile.apply(fileName);
 
@@ -124,6 +126,7 @@ public class Day5 {
         return getResult.apply(state.stacks());
     }
 
+    @Override
     public String getPart2Result(String fileName) {
         Tuple state = recreateStateFromFile.apply(fileName);
 

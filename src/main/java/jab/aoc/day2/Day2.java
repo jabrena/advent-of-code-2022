@@ -1,5 +1,6 @@
 package jab.aoc.day2;
 
+import jab.aoc.Day;
 import jab.aoc.Utils;
 import java.util.stream.Stream;
 
@@ -8,10 +9,11 @@ import java.util.stream.Stream;
  * https://adventofcode.com/2022/day/2
  *
  */
-public class Day2 {
+public class Day2 implements Day {
 
     private static final String SEPARATOR = " ";
 
+    @Override
     public Integer getPart1Result(String fileName) {
         return Utils
             .loadFileToList(fileName)
@@ -22,6 +24,7 @@ public class Day2 {
             .reduce(0, Integer::sum);
     }
 
+    @Override
     public Integer getPart2Result(String fileName) {
         return Utils
             .loadFileToList(fileName)

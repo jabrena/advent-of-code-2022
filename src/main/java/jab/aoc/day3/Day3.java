@@ -1,5 +1,6 @@
 package jab.aoc.day3;
 
+import jab.aoc.Day;
 import jab.aoc.Utils;
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
  * https://adventofcode.com/2022/day/3
  *
  */
-public class Day3 {
+public class Day3 implements Day {
 
     private Function<String, Integer> getPriority = param -> {
         final String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -28,6 +29,7 @@ public class Day3 {
 
     // @formatter:on
 
+    @Override
     public Long getPart1Result(String fileName) {
         Function<String, List<String>> splitInTheMiddle = param -> {
             var mid = param.length() / 2;
@@ -52,6 +54,7 @@ public class Day3 {
             .reduce(0, Long::sum);
     }
 
+    @Override
     public Long getPart2Result(String fileName) {
         Function<String, Collection<List<String>>> groupBy3 = param -> {
             final int chunkSize = 3;
