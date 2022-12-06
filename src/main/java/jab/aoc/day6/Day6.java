@@ -35,19 +35,15 @@ public class Day6 implements Day<List<Integer>> {
     // @formatter:off
     @Override
     public List<Integer> getPart1Result(String fileName) {
-        Integer markerLength = 4;
-
         return Utils.loadFileToList(fileName).stream()
-                .map(line -> detectMarker.apply(line, markerLength))
+                .map(line -> detectMarker.apply(line, 4))
                 .toList();
     }
 
     @Override
     public List<Integer> getPart2Result(String fileName) {
-        Integer markerLength = 14;
-
         return Utils.loadFileToList(fileName).stream()
-                .map(str -> detectMarker.apply(str, markerLength))
+                .map(str -> detectMarker.apply(str, 14))
                 .toList();
     }
     // @formatter:on
