@@ -1,5 +1,7 @@
 package jab.aoc.day2;
 
+import jab.aoc.AOCException;
+
 /**
  * Player 1 options: A for Rock, B for Paper, and C for Scissors
  * Player 2 options: X for Rock, Y for Paper, and Z for Scissors
@@ -31,7 +33,7 @@ record Game1(Column1 column1, Column2 column2) {
         } else if (column2() == Column2.SCISSOR) {
             return ShapeScores.THREE;
         } else {
-            throw new RuntimeException("Option not identified");
+            throw new AOCException("Option not identified");
         }
     }
 
@@ -62,7 +64,7 @@ record Game1(Column1 column1, Column2 column2) {
         } else if (column1() == Column1.SCISSOR && column2() == Column2.SCISSOR) {
             return GameOutcomes.DRAW;
         } else {
-            throw new RuntimeException("Option not identified");
+            throw new AOCException("Option not identified");
         }
     }
 

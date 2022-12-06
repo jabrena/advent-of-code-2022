@@ -62,7 +62,7 @@ public class Day4 implements Day<Long> {
             set2.addAll(tuple.part1());
             set2.retainAll(tuple.part2());
 
-            if (set2.size() > 0) {
+            if (!set2.isEmpty()) {
                 return true;
             }
             return false;
