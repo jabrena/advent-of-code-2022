@@ -15,8 +15,11 @@ import java.util.function.Predicate;
  */
 public class Day6 implements Day<List<Integer>> {
 
+    // @formatter:off
     private Predicate<String> areUniqueCharacters = param ->
-        getUniqueHashSetString.apply(param).size() == param.length();
+            getUniqueHashSetString(param).size() == param.length();
+
+    // @formatter:on
 
     private BiFunction<String, Integer, Integer> detectMarker = (line, markerLength) -> {
         Integer result = 0;

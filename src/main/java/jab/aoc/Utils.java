@@ -10,10 +10,12 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+/**
+ * A set of useful methods used in multiple AOC solutions
+ */
 public class Utils {
 
     /**
@@ -30,11 +32,26 @@ public class Utils {
         }
     }
 
-    private static final String GROUP_SEPARATOR = System.lineSeparator() + System.lineSeparator();
-    public static final Pattern GROUP_SEPARATOR_PATTERN = Pattern.compile(GROUP_SEPARATOR);
+    // @formatter:off
 
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    public static final Pattern LINE_SEPARATOR_PATTERN = Pattern.compile(LINE_SEPARATOR);
+    /**
+     * This pattern is used to identify blank patterns when you iterate in the file content.
+     */
+    public static final Pattern GROUP_SEPARATOR_PATTERN =
+            Pattern.compile(System.lineSeparator() + System.lineSeparator());
+
+    /**
+     * This pattern is used to identify a return line.
+     */
+    public static final Pattern LINE_SEPARATOR_PATTERN =
+            Pattern.compile(System.lineSeparator());
+
+    // @formatter:on
+
+    /**
+     * Pattern used to identify a Space in a String
+     */
+    public static final Pattern SPACE_SEPARATOR_PATTERN = Pattern.compile(" ");
 
     /**
      * Given a file name stored in resources
@@ -49,15 +66,35 @@ public class Utils {
         }
     }
 
+    // @formatter:off
+
+    /**
+     * Pattern used to split a String in multiple Characters
+     */
     public static final Pattern STRING_SPLIT_PATTERN = Pattern.compile("(?!^)");
 
-    // @formatter:off
-    public static final Function<String, Set<String>> getUniqueSetString = str ->
-        Arrays.stream(STRING_SPLIT_PATTERN.split(str))
+    /**
+     * Given a String
+     * Then returns as a Set of Strings
+     *
+     * @param string String
+     * @return A Set of Characters
+     */
+    public static Set<String> getUniqueSetString(String string) {
+        return Arrays.stream(STRING_SPLIT_PATTERN.split(string))
                 .collect(Collectors.toUnmodifiableSet());
+    }
 
-    public static final Function<String, HashSet<String>> getUniqueHashSetString = str ->
-        Arrays.stream(STRING_SPLIT_PATTERN.split(str))
+    /**
+     * Given a String
+     * Then returns as a HashSet of Strings
+     *
+     * @param string String
+     * @return A HashSet of Characters
+     */
+    public static HashSet<String> getUniqueHashSetString(String string) {
+        return Arrays.stream(STRING_SPLIT_PATTERN.split(string))
                 .collect(Collectors.toCollection(HashSet::new));
+    }
     // @formatter:on
 }

@@ -1,8 +1,9 @@
 package jab.aoc.day2;
 
+import static jab.aoc.Utils.SPACE_SEPARATOR_PATTERN;
+
 import jab.aoc.Day;
 import jab.aoc.Utils;
-import java.util.stream.Stream;
 
 /**
  * Solution for AOC 2022, Day 2
@@ -11,14 +12,12 @@ import java.util.stream.Stream;
  */
 public class Day2 implements Day<Integer> {
 
-    private static final String SEPARATOR = " ";
-
     @Override
     public Integer getPart1Result(String fileName) {
         return Utils
             .loadFileToList(fileName)
             .stream()
-            .map(line -> line.split(SEPARATOR))
+            .map(SPACE_SEPARATOR_PATTERN::split)
             .map(arr -> new Game1(Column1.fromValue(arr[0]), Column2.fromValue(arr[1])))
             .map(Game1::getScore)
             .reduce(0, Integer::sum);
@@ -29,7 +28,7 @@ public class Day2 implements Day<Integer> {
         return Utils
             .loadFileToList(fileName)
             .stream()
-            .map(line -> line.split(SEPARATOR))
+            .map(SPACE_SEPARATOR_PATTERN::split)
             .map(arr -> new Game2(Column1.fromValue(arr[0]), Column2.fromValue(arr[1])))
             .map(Game2::getScore)
             .reduce(0, Integer::sum);
