@@ -9,7 +9,7 @@ import java.util.stream.Stream;
  * https://adventofcode.com/2022/day/2
  *
  */
-public class Day2 implements Day {
+public class Day2 implements Day<Integer> {
 
     private static final String SEPARATOR = " ";
 

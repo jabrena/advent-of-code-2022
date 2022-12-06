@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
  * https://adventofcode.com/2022/day/3
  *
  */
-public class Day3 implements Day {
+public class Day3 implements Day<Long> {
 
     private Function<String, Integer> getPriority = param -> {
         final String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

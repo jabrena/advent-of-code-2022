@@ -52,11 +52,11 @@ public class Utils {
     public static final Pattern STRING_SPLIT_PATTERN = Pattern.compile("(?!^)");
 
     // @formatter:off
-    public static Function<String, Set<String>> getUniqueSetString = str ->
+    public static final Function<String, Set<String>> getUniqueSetString = str ->
         Arrays.stream(STRING_SPLIT_PATTERN.split(str))
                 .collect(Collectors.toUnmodifiableSet());
 
-    public static Function<String, HashSet<String>> getUniqueHashSetString = str ->
+    public static final Function<String, HashSet<String>> getUniqueHashSetString = str ->
         Arrays.stream(STRING_SPLIT_PATTERN.split(str))
                 .collect(Collectors.toCollection(HashSet::new));
     // @formatter:on

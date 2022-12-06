@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
  * https://adventofcode.com/2022/day/4
  *
  */
-public class Day4 implements Day {
+public class Day4 implements Day<Long> {
 
     // @formatter:off
     private Function<String, List<Integer>> toListOfIntegers = arr -> {

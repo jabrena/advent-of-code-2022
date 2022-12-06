@@ -8,7 +8,12 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-public class Day6 implements Day {
+/**
+ * Solution for AOC 2022, Day 6
+ * https://adventofcode.com/2022/day/6
+ *
+ */
+public class Day6 implements Day<List<Integer>> {
 
     private Function<String, Boolean> areUniqueCharacters = param ->
         getUniqueHashSetString.apply(param).size() == param.length();

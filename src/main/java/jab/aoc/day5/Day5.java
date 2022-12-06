@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
  * https://adventofcode.com/2022/day/5
  *
  */
-public class Day5 implements Day {
+public class Day5 implements Day<String> {
 
     private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
 

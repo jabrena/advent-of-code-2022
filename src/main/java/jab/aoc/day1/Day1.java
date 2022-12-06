@@ -14,7 +14,7 @@ import java.util.stream.LongStream;
  * https://adventofcode.com/2022/day/1
  *
  */
-public class Day1 implements Day {
+public class Day1 implements Day<Long> {
 
     private Long processData(String fileName, Integer limit) {
         return Arrays
