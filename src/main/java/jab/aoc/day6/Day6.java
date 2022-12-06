@@ -7,6 +7,7 @@ import jab.aoc.Utils;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Solution for AOC 2022, Day 6
@@ -15,7 +16,7 @@ import java.util.function.Function;
  */
 public class Day6 implements Day<List<Integer>> {
 
-    private Function<String, Boolean> areUniqueCharacters = param ->
+    private Predicate<String> areUniqueCharacters = param ->
         getUniqueHashSetString.apply(param).size() == param.length();
 
     private BiFunction<String, Integer, Integer> detectMarker = (line, markerLength) -> {
@@ -25,7 +26,7 @@ public class Day6 implements Day<List<Integer>> {
         for (int i = 0; i < line.length(); i++) {
             String chunkToEvaluate = line.substring(i, i + markerLength);
             result = i + markerLength;
-            if (areUniqueCharacters.apply(chunkToEvaluate)) {
+            if (areUniqueCharacters.test(chunkToEvaluate)) {
                 break;
             }
         }
