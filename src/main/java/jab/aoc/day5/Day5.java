@@ -2,6 +2,7 @@ package jab.aoc.day5;
 
 import static jab.aoc.Utils.GROUP_SEPARATOR_PATTERN;
 import static jab.aoc.Utils.LINE_SEPARATOR_PATTERN;
+import static jab.aoc.Utils.SPACE_SEPARATOR_PATTERN;
 
 import jab.aoc.Day;
 import jab.aoc.Utils;
@@ -23,12 +24,10 @@ import java.util.stream.IntStream;
  */
 public class Day5 implements Day<String> {
 
-    private static final Pattern SPACE_PATTERN = Pattern.compile(" ");
-
     // @formatter:off
     private record Command(Integer quantity, Integer from, Integer to) {
         public static Command fromString(String str) {
-            var arr = SPACE_PATTERN.split(str);
+            var arr = SPACE_SEPARATOR_PATTERN.split(str);
             return new Command(
                     Integer.parseInt(arr[1]),
                     Integer.parseInt(arr[3]) - 1,

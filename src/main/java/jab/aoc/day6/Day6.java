@@ -1,6 +1,6 @@
 package jab.aoc.day6;
 
-import static jab.aoc.Utils.getUniqueHashSetString;
+import static jab.aoc.Utils.getUniqueCharactersAsHashSet;
 
 import jab.aoc.Day;
 import jab.aoc.Utils;
@@ -15,8 +15,11 @@ import java.util.function.Predicate;
  */
 public class Day6 implements Day<List<Integer>> {
 
+    // @formatter:off
     private Predicate<String> areUniqueCharacters = param ->
-        getUniqueHashSetString.apply(param).size() == param.length();
+            getUniqueCharactersAsHashSet(param).size() == param.length();
+
+    // @formatter:on
 
     private BiFunction<String, Integer, Integer> detectMarker = (line, markerLength) -> {
         Integer result = 0;

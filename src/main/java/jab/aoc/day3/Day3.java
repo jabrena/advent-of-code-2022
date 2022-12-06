@@ -1,12 +1,12 @@
 package jab.aoc.day3;
 
+import static jab.aoc.Utils.getUniqueCharactersAsHashSet;
+
 import jab.aoc.Day;
 import jab.aoc.Utils;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -23,12 +23,6 @@ public class Day3 implements Day<Long> {
         return alphabet.indexOf(param) + 1;
     };
 
-    // @formatter:off
-    private Function<String, Set<String>> getChars = str ->
-            Arrays.stream(str.split("(?!^)")).collect(Collectors.toSet());
-
-    // @formatter:on
-
     @Override
     public Long getPart1Result(String fileName) {
         Function<String, List<String>> splitInTheMiddle = param -> {
@@ -40,8 +34,8 @@ public class Day3 implements Day<Long> {
             var group1 = param.get(0);
             var group2 = param.get(1);
 
-            var set = new HashSet<>(getChars.apply(group1));
-            set.retainAll(getChars.apply(group2));
+            var set = new HashSet<>(getUniqueCharactersAsHashSet(group1));
+            set.retainAll(getUniqueCharactersAsHashSet(group2));
             return set.stream().findFirst().get();
         };
 
@@ -71,9 +65,9 @@ public class Day3 implements Day<Long> {
             var group2 = param.get(1);
             var group3 = param.get(2);
 
-            var set = new HashSet<>(getChars.apply(group1));
-            set.retainAll(getChars.apply(group2));
-            set.retainAll(getChars.apply(group3));
+            var set = new HashSet<>(getUniqueCharactersAsHashSet(group1));
+            set.retainAll(getUniqueCharactersAsHashSet(group2));
+            set.retainAll(getUniqueCharactersAsHashSet(group3));
             return set.stream().findFirst().get();
         };
 
