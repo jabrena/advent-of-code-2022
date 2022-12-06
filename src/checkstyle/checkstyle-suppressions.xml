@@ -7,4 +7,5 @@
     <suppress checks="Javadoc" files="." />
     <suppress checks="Indentation" files="." />
     <suppress checks="VariableDeclarationUsageDistance" files="." />
+    <suppress checks="AbbreviationAsWordInName" files="." />
 </suppressions>
