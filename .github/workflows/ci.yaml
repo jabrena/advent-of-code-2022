@@ -35,6 +35,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./mvnw --batch-mode --no-transfer-progress -B verify \
+          ./mvnw --batch-mode --no-transfer-progress -B verify site \
             org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=jabrena_advent-of-code-2022
+      - name: Upload Jacoco report
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-reports
+          path: |
+            target/site/jacoco
+            target/surefire-reports
