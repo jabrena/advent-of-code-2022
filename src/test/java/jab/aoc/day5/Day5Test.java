@@ -4,10 +4,10 @@ import static org.assertj.core.api.BDDAssertions.then;
 
 import org.junit.jupiter.api.Test;
 
-public class Day5Test {
+class Day5Test {
 
     @Test
-    public void given_sampleData_when_execute_day5_getPart1Solution_then_expected_result() {
+    void given_sampleData_when_execute_day5_getPart1Solution_then_expected_result() {
         //Given
         String fileName = "day5/input-sample.txt";
 
@@ -20,7 +20,7 @@ public class Day5Test {
     }
 
     @Test
-    public void given_data_when_execute_day5_getPart1Solution_then_expected_result() {
+    void given_data_when_execute_day5_getPart1Solution_then_expected_result() {
         //Given
         String fileName = "day5/input.txt";
 
@@ -33,7 +33,7 @@ public class Day5Test {
     }
 
     @Test
-    public void given_sampleData_when_execute_day5_getPart2Solution_then_expected_result() {
+    void given_sampleData_when_execute_day5_getPart2Solution_then_expected_result() {
         //Given
         String fileName = "day5/input-sample.txt";
 
@@ -46,7 +46,7 @@ public class Day5Test {
     }
 
     @Test
-    public void given_data_when_execute_day5_getPart2Solution_then_expected_result() {
+    void given_data_when_execute_day5_getPart2Solution_then_expected_result() {
         //Given
         String fileName = "day5/input.txt";
 
