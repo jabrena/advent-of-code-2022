@@ -80,7 +80,7 @@ public class Utils {
      * @param string String
      * @return A Set of Characters
      */
-    public static Set<String> getUniqueSetString(String string) {
+    public static Set<String> getUniqueCharactersAsSet(String string) {
         return Arrays.stream(STRING_SPLIT_PATTERN.split(string))
                 .collect(Collectors.toUnmodifiableSet());
     }
@@ -92,7 +92,7 @@ public class Utils {
      * @param string String
      * @return A HashSet of Characters
      */
-    public static HashSet<String> getUniqueHashSetString(String string) {
+    public static Set<String> getUniqueCharactersAsHashSet(String string) {
         return Arrays.stream(STRING_SPLIT_PATTERN.split(string))
                 .collect(Collectors.toCollection(HashSet::new));
     }

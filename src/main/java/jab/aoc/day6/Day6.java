@@ -1,6 +1,6 @@
 package jab.aoc.day6;
 
-import static jab.aoc.Utils.getUniqueHashSetString;
+import static jab.aoc.Utils.getUniqueCharactersAsHashSet;
 
 import jab.aoc.Day;
 import jab.aoc.Utils;
@@ -17,7 +17,7 @@ public class Day6 implements Day<List<Integer>> {
 
     // @formatter:off
     private Predicate<String> areUniqueCharacters = param ->
-            getUniqueHashSetString(param).size() == param.length();
+            getUniqueCharactersAsHashSet(param).size() == param.length();
 
     // @formatter:on
 

@@ -1,6 +1,6 @@
 package jab.aoc.day3;
 
-import static jab.aoc.Utils.getUniqueHashSetString;
+import static jab.aoc.Utils.getUniqueCharactersAsHashSet;
 
 import jab.aoc.Day;
 import jab.aoc.Utils;
@@ -34,8 +34,8 @@ public class Day3 implements Day<Long> {
             var group1 = param.get(0);
             var group2 = param.get(1);
 
-            var set = new HashSet<>(getUniqueHashSetString(group1));
-            set.retainAll(getUniqueHashSetString(group2));
+            var set = new HashSet<>(getUniqueCharactersAsHashSet(group1));
+            set.retainAll(getUniqueCharactersAsHashSet(group2));
             return set.stream().findFirst().get();
         };
 
@@ -65,9 +65,9 @@ public class Day3 implements Day<Long> {
             var group2 = param.get(1);
             var group3 = param.get(2);
 
-            var set = new HashSet<>(getUniqueHashSetString(group1));
-            set.retainAll(getUniqueHashSetString(group2));
-            set.retainAll(getUniqueHashSetString(group3));
+            var set = new HashSet<>(getUniqueCharactersAsHashSet(group1));
+            set.retainAll(getUniqueCharactersAsHashSet(group2));
+            set.retainAll(getUniqueCharactersAsHashSet(group3));
             return set.stream().findFirst().get();
         };
 
