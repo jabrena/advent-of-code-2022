@@ -43,7 +43,7 @@ public class Day4 implements Day<Long> {
             return false;
         };
 
-        return Utils.loadFileToList(fileName)
+        return Utils.readFileToList(fileName)
                 .stream()
                 .map(toTuple)
                 .map(detectSubsets)
@@ -70,7 +70,7 @@ public class Day4 implements Day<Long> {
 
         // @formatter:off
         return Utils
-                .loadFileToList(fileName)
+                .readFileToList(fileName)
                 .stream()
                 .map(toTuple)
                 .map(detectOverlap)

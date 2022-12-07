@@ -30,6 +30,7 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Run solutions for AOC 2022
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -38,6 +39,7 @@ jobs:
           ./mvnw --batch-mode --no-transfer-progress -B verify site \
             org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
             -Dsonar.projectKey=jabrena_advent-of-code-2022
+
       - name: Upload Jacoco report
         uses: actions/upload-artifact@v3
         with:

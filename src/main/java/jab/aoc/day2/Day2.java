@@ -15,7 +15,7 @@ public class Day2 implements Day<Integer> {
     @Override
     public Integer getPart1Result(String fileName) {
         return Utils
-            .loadFileToList(fileName)
+            .readFileToList(fileName)
             .stream()
             .map(SPACE_SEPARATOR_PATTERN::split)
             .map(arr -> new Game1(Column1.fromValue(arr[0]), Column2.fromValue(arr[1])))
@@ -26,7 +26,7 @@ public class Day2 implements Day<Integer> {
     @Override
     public Integer getPart2Result(String fileName) {
         return Utils
-            .loadFileToList(fileName)
+            .readFileToList(fileName)
             .stream()
             .map(SPACE_SEPARATOR_PATTERN::split)
             .map(arr -> new Game2(Column1.fromValue(arr[0]), Column2.fromValue(arr[1])))

@@ -38,14 +38,14 @@ public class Day6 implements Day<List<Integer>> {
     // @formatter:off
     @Override
     public List<Integer> getPart1Result(String fileName) {
-        return Utils.loadFileToList(fileName).stream()
+        return Utils.readFileToList(fileName).stream()
                 .map(line -> detectMarker.apply(line, 4))
                 .toList();
     }
 
     @Override
     public List<Integer> getPart2Result(String fileName) {
-        return Utils.loadFileToList(fileName).stream()
+        return Utils.readFileToList(fileName).stream()
                 .map(str -> detectMarker.apply(str, 14))
                 .toList();
     }

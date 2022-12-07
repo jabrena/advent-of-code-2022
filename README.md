@@ -12,6 +12,7 @@ Solutions for Advent of code 2022
 - [Day 4: Camp Cleanup](src/main/java/jab/aoc/day4)
 - [Day 5: Supply Stacks](src/main/java/jab/aoc/day5)
 - [Day 6: Tuning Trouble](src/main/java/jab/aoc/day6)
+- [Day 7: No Space Left On Device](src/main/java/jab/aoc/day7)
 
 ```
 mvn verify

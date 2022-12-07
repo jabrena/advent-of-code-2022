@@ -8,4 +8,7 @@
     <suppress checks="Indentation" files="." />
     <suppress checks="VariableDeclarationUsageDistance" files="." />
     <suppress checks="AbbreviationAsWordInName" files="." />
+
+    <!-- Temporal Exception ¯\_(ツ)_/¯ -->
+    <suppress checks="LocalVariableName" files="GraphTest" />
 </suppressions>
