@@ -33,6 +33,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>5.9.1</version>
@@ -138,7 +144,9 @@
                         <configuration>
                             <rules>
                                 <dependencyConvergence/>
+                                <!--
                                 <banDuplicatePomDependencyVersions/>
+                                -->
                                 <requireMavenVersion>
                                     <version>3.8.6</version>
                                 </requireMavenVersion>
@@ -182,6 +190,37 @@
                         </goals>
                     </execution>
                     <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.80</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.80</minimum>
+                                        </limit>
+                                    </limits>
+                                    <!-- Experiments ¯\_(ツ)_/¯ -->
+                                    <excludes>
+                                        <exclude>jab.aoc.day7.tree.GraphTest</exclude>
+                                        <exclude>jab.aoc.day7.tree.GraphTest.1Node</exclude>
+                                        <exclude>jab.aoc.day7.tree.GraphTest.1Type</exclude>
+                                    </excludes>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>report</id>
                         <goals>
                             <goal>report</goal>
@@ -202,6 +241,11 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.4.1</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>

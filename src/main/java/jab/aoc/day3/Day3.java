@@ -40,7 +40,7 @@ public class Day3 implements Day<Long> {
         };
 
         return Utils
-            .loadFileToList(fileName)
+            .readFileToList(fileName)
             .stream()
             .map(splitInTheMiddle::apply)
             .map(find::apply)
@@ -54,7 +54,7 @@ public class Day3 implements Day<Long> {
             final int chunkSize = 3;
             final AtomicInteger counter = new AtomicInteger();
             return Utils
-                .loadFileToList(param)
+                .readFileToList(param)
                 .stream()
                 .collect(Collectors.groupingBy(it -> counter.getAndIncrement() / chunkSize))
                 .values();
