@@ -36,17 +36,4 @@ class MatrixHelper {
         return matrix;
         // @formatter:on
     }
-
-    public static void print(Integer[][] matrix) {
-        Arrays
-            .stream(matrix)
-            .forEach(yy -> {
-                Arrays
-                    .stream(yy)
-                    .forEach(xx -> {
-                        System.out.print(xx + " ");
-                    });
-                System.out.println();
-            });
-    }
 }
