@@ -58,6 +58,7 @@ public class Day8 implements Day<Integer> {
             || isVisible(grid, i, j, Edge.BOTTON)
         );
     }
+
     // @formatter:om
 
     @Override
@@ -120,6 +121,7 @@ public class Day8 implements Day<Integer> {
                 * viewingDistance(i, j, Edge.BOTTON, grid)
         );
     }
+
     // @formatter:on
 
     @Override
