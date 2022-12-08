@@ -15,7 +15,6 @@ public class Day8 implements Day<Integer> {
     }
 
     private boolean isVisible(Integer[][] grid, int i, int j, Edge edge) {
-        // True if the tree at (i,j) is visible from edge (l/r/t/b).
         int treeHeight = grid[i][j];
         boolean treeVisible = true;
 
@@ -76,7 +75,6 @@ public class Day8 implements Day<Integer> {
     }
 
     private int viewingDistance(int i, int j, Edge edge, Integer[][] grid) {
-        // Return the viewing distance for tree (i,j) looking out to edge.
         int treeHeight = grid[i][j];
         int distance = 0;
 
@@ -126,7 +124,6 @@ public class Day8 implements Day<Integer> {
     public Integer getPart2Result(String fileName) {
         Integer[][] grid = MatrixHelper.getMatrix(fileName);
 
-        // Part 2 asks for the maximum scenic score.
         List<Integer> scores = new ArrayList<>();
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
