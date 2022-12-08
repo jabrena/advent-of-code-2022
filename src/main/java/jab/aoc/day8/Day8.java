@@ -50,14 +50,15 @@ public class Day8 implements Day<Integer> {
         return treeVisible;
     }
 
+    // @formatter:off
     private boolean isVisibleFromOutside(Integer[][] grid, Integer i, Integer j) {
-        return (
-            isVisible(grid, i, j, Edge.LEFT) ||
-            isVisible(grid, i, j, Edge.RIGHT) ||
-            isVisible(grid, i, j, Edge.TOP) ||
-            isVisible(grid, i, j, Edge.BOTTON)
+        return (isVisible(grid, i, j, Edge.LEFT)
+            || isVisible(grid, i, j, Edge.RIGHT)
+            || isVisible(grid, i, j, Edge.TOP)
+            || isVisible(grid, i, j, Edge.BOTTON)
         );
     }
+    // @formatter:om
 
     @Override
     public Integer getPart1Result(String fileName) {
@@ -111,14 +112,15 @@ public class Day8 implements Day<Integer> {
         return distance;
     }
 
+    // @formatter:off
     private int scenicScore(int i, int j, Integer[][] grid) {
-        return (
-            viewingDistance(i, j, Edge.LEFT, grid) *
-            viewingDistance(i, j, Edge.RIGHT, grid) *
-            viewingDistance(i, j, Edge.TOP, grid) *
-            viewingDistance(i, j, Edge.BOTTON, grid)
+        return (viewingDistance(i, j, Edge.LEFT, grid)
+                * viewingDistance(i, j, Edge.RIGHT, grid)
+                * viewingDistance(i, j, Edge.TOP, grid)
+                * viewingDistance(i, j, Edge.BOTTON, grid)
         );
     }
+    // @formatter:on
 
     @Override
     public Integer getPart2Result(String fileName) {
