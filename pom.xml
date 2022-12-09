@@ -189,12 +189,12 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+                    <!--
                     <execution>
                         <id>check</id>
                         <goals>
                             <goal>check</goal>
                         </goals>
-                        <!--
                         <configuration>
                             <rules>
                                 <rule>
@@ -220,8 +220,8 @@
                                 </rule>
                             </rules>
                         </configuration>
-                        -->
                     </execution>
+                    -->
                     <execution>
                         <id>report</id>
                         <goals>
