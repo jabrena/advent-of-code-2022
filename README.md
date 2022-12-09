@@ -13,6 +13,7 @@ Solutions for Advent of code 2022
 - [Day 5: Supply Stacks](src/main/java/jab/aoc/day5)
 - [Day 6: Tuning Trouble](src/main/java/jab/aoc/day6)
 - [Day 7: No Space Left On Device](src/main/java/jab/aoc/day7)
+- [Day 9: Rope Bridge](src/main/java/jab/aoc/day9)
 
 ```
 mvn verify

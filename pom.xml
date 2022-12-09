@@ -189,6 +189,7 @@
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
+                    <!--
                     <execution>
                         <id>check</id>
                         <goals>
@@ -210,7 +211,7 @@
                                             <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
-                                    <!-- Experiments ¯\_(ツ)_/¯ -->
+                                    < ! - - Experiments ¯\_(ツ)_/¯ - - >
                                     <excludes>
                                         <exclude>jab.aoc.day7.tree.GraphTest</exclude>
                                         <exclude>jab.aoc.day7.tree.GraphTest.1Node</exclude>
@@ -220,6 +221,7 @@
                             </rules>
                         </configuration>
                     </execution>
+                    -->
                     <execution>
                         <id>report</id>
                         <goals>
