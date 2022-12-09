@@ -34,15 +34,15 @@ class RopePhysics {
     public void print() {
         for (int y = 0; y < cellsH.length; y++) {
             for (int x = 0; x < cellsH[0].length; x++) {
-                if (cellsH[y][x] == true) {
+                if (cellsH[y][x]) {
                     System.out.print("H");
                     continue;
                 }
-                if (cellsT[y][x] == true) {
+                if (cellsT[y][x]) {
                     System.out.print("T");
                     continue;
                 }
-                if (cellsS[y][x] == true) {
+                if (cellsS[y][x]) {
                     System.out.print("s");
                     continue;
                 }
@@ -55,7 +55,7 @@ class RopePhysics {
     public void printVisited() {
         for (int y = 0; y < cellsVisited.length; y++) {
             for (int x = 0; x < cellsVisited[0].length; x++) {
-                if (cellsVisited[y][x] == true) {
+                if (cellsVisited[y][x]) {
                     System.out.print("#");
                     continue;
                 }
