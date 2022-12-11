@@ -16,6 +16,67 @@ class Day10Test {
         var result = day10.getPart1Result(fileName);
 
         //Then
-        then(result).isEqualTo(10);
+        then(result).isEqualTo(13140);
+    }
+
+    @Test
+    void given_data_when_execute_day10_getPart1Solution_then_expected_result() {
+        //Given
+        String fileName = "day10/input.txt";
+
+        //When
+        Day10 day10 = new Day10();
+        var result = day10.getPart1Result(fileName);
+
+        //Then
+        then(result).isEqualTo(12540);
+    }
+
+    @Test
+    void given_sampleData_when_execute_day10_getPart2Solution_then_expected_result() {
+        //Given
+        String fileName = "day10/input-sample.txt";
+
+        //When
+        Day10 day10 = new Day10();
+        var result = day10.getPart2Result(fileName);
+
+        var expectedResult =
+"""
+##..##..##..##..##..##..##..##..##..##..
+###...###...###...###...###...###...###.
+####....####....####....####....####....
+#####.....#####.....#####.....#####.....
+######......######......######......####
+#######.......#######.......#######.....
+""";
+
+        //Then
+        then(result).isEqualTo(expectedResult);
+    }
+
+    //FECZELHE
+    @Test
+    void given_data_when_execute_day10_getPart2Solution_then_expected_result() {
+        //Given
+        String fileName = "day10/input.txt";
+
+        //When
+        Day10 day10 = new Day10();
+        var result = day10.getPart2Result(fileName);
+
+        //Then
+        var expectedResult =
+"""
+####.####..##..####.####.#....#..#.####.
+#....#....#..#....#.#....#....#..#.#....
+###..###..#......#..###..#....####.###..
+#....#....#.....#...#....#....#..#.#....
+#....#....#..#.#....#....#....#..#.#....
+#....####..##..####.####.####.#..#.####.
+""".trim();
+
+
+        then(result).isEqualTo(expectedResult);
     }
 }
