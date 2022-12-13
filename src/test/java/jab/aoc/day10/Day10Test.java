@@ -16,7 +16,7 @@ class Day10Test {
         var result = day10.getPart1Result(fileName);
 
         //Then
-        then(result).isEqualTo(13140);
+        then(result).isEqualTo(String.valueOf(13140));
     }
 
     @Test
@@ -29,7 +29,7 @@ class Day10Test {
         var result = day10.getPart1Result(fileName);
 
         //Then
-        then(result).isEqualTo(12540);
+        then(result).isEqualTo(String.valueOf(12540));
     }
 
     @Test
@@ -42,14 +42,14 @@ class Day10Test {
         var result = day10.getPart2Result(fileName);
 
         var expectedResult =
-"""
+            """
+
 ##..##..##..##..##..##..##..##..##..##..
 ###...###...###...###...###...###...###.
 ####....####....####....####....####....
 #####.....#####.....#####.....#####.....
 ######......######......######......####
-#######.......#######.......#######.....
-""";
+#######.......#######.......#######.....""";
 
         //Then
         then(result).isEqualTo(expectedResult);
@@ -67,15 +67,14 @@ class Day10Test {
 
         //Then
         var expectedResult =
-"""
+            """
+
 ####.####..##..####.####.#....#..#.####.
 #....#....#..#....#.#....#....#..#.#....
 ###..###..#......#..###..#....####.###..
 #....#....#.....#...#....#....#..#.#....
 #....#....#..#.#....#....#....#..#.#....
-#....####..##..####.####.####.#..#.####.
-""".trim();
-
+#....####..##..####.####.####.#..#.####.""";
 
         then(result).isEqualTo(expectedResult);
     }
