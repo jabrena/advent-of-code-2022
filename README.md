@@ -14,6 +14,7 @@ Solutions for Advent of code 2022
 - [Day 6: Tuning Trouble](src/main/java/jab/aoc/day6)
 - [Day 7: No Space Left On Device](src/main/java/jab/aoc/day7)
 - [Day 9: Rope Bridge](src/main/java/jab/aoc/day9) KO :(
+- [Day 10: Cathode-Ray Tube](src/main/java/jab/aoc/day10)
 - [Day 13: Distress Signal](src/main/java/jab/aoc/day13) KO (I am not a master in Recursion)
 
 ```

@@ -1,10 +1,12 @@
 package jab.aoc.day9;
 
+import jab.aoc.Day;
 import jab.aoc.Utils;
 import java.util.Arrays;
 
-public class Day9 {
+public class Day9 implements Day<Long> {
 
+    @Override
     public Long getPart1Result(String fileName) {
         RopePhysics ropePhysics = new RopePhysics();
         ropePhysics.create(25, 25);
@@ -22,5 +24,10 @@ public class Day9 {
                 .filter(v -> v)
                 .count();
         // @formatter:on
+    }
+
+    @Override
+    public Long getPart2Result(String fileName) {
+        return null;
     }
 }
