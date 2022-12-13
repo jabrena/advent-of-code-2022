@@ -1,79 +1,101 @@
 package jab.aoc.day11;
 
-import static jab.aoc.Utils.GROUP_SEPARATOR_PATTERN;
-import static jab.aoc.Utils.LINE_SEPARATOR_PATTERN;
-
 import jab.aoc.Day;
 import jab.aoc.Utils;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Day11 implements Day<Long> {
 
-    @Override
-    public Long getPart1Result(String fileName) {
+    private Monkey createMutableMonkey(List<String> monkeyLines) {
+        String[] itemComponents = monkeyLines.get(1).substring(18).split(", ");
+        var queue = new LinkedList<>(Arrays.stream(itemComponents).map(Long::parseLong).toList());
 
-        /*
-        var data = Utils.readFileToString(fileName);
-        var monkeyGroups = GROUP_SEPARATOR_PATTERN.split(data);
-        Map<String, String> monkeys = new HashMap<>();
-        Arrays.stream(monkeyGroups)
-                .map(str -> LINE_SEPARATOR_PATTERN.split(str))
-                .forEach(arr ->{
-                    var monkeyKey = arr[0].replaceAll(":", "").toLowerCase();
-                    System.out.println(monkeyKey);
-                    monkeys.put(monkeyKey, "");
-                    var items = arr[1].replaceAll("  Starting items: ", "");
-                    var line2 = arr[2].replaceAll("  Operation: new = old ", "").split(" ");
-                    var operator = line2[0];
-                    var divisible = Integer.parseInt(arr[3].replaceAll("  Test: divisible by ", "").trim());
-                    Arrays.stream(items.split(","))
-                            .map(String::trim)
-                            .map(Integer::valueOf)
-                            .map(i -> {
-                                var value = 0;
-                                if(line2[1].equals("old")) {
-                                    value = i;
-                                } else {
-                                    value = Integer.parseInt(line2[1]);
-                                }
-                                if (operator.equals("*")) {
-                                    return i * value;
-                                } else {
-                                    return i + value;
-                                }
-                            })
-                            .forEach(i -> {
-                                Integer result = (int) Math.floor(i / 3);
-                                System.out.println(result);
-                                if ((result % divisible) == 0) {
-                                    var monkey = arr[4].replaceAll("    If true: throw to ", "");
-                                    monkeys.put(monkey, monkeys.get(monkey) + " " + result);
-                                } else {
-                                    var monkey = arr[5].replaceAll("    If false: throw to ", "");
-                                    monkeys.put(monkey, monkeys.get(monkey) + " " + result);
-                                }
-                            });
-                });
+        String[] operationArr = monkeyLines.get(2).substring(23).split(" ");
+        var operation = operationArr[0];
+        var operand = operationArr[1].equals("old") ? 0 : Integer.parseInt(operationArr[1]);
+        var divisor = Integer.parseInt(monkeyLines.get(3).substring(21));
+        var trueMonkeyId = Integer.parseInt(monkeyLines.get(4).substring(29));
+        var falseMonkeyId = Integer.parseInt(monkeyLines.get(5).substring(30));
 
-        for (Map.Entry<String, String> entry : monkeys.entrySet()) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
+        return new Monkey(queue, operation, operand, divisor, trueMonkeyId, falseMonkeyId, 0);
+    }
+
+    private List<Monkey> getMonkeyList(String fileName) {
+        List<String> lines = Utils.readFileToList(fileName);
+
+        var monkeys = new ArrayList<Monkey>();
+        for (int i = 0; i < lines.size(); i += 7) {
+            monkeys.add(createMutableMonkey(lines.subList(i, i + 6)));
+        }
+        return monkeys;
+    }
+
+    //TODO: Refactor to avoid Mutable Monkeys
+    private List<Monkey> processMonkeys(List<Monkey> monkeys, Integer rounds, Boolean flag) {
+        //The trick
+        Integer lcm = monkeys.stream().map(Monkey::getDivisor).reduce(1, (a, b) -> a * b);
+
+        for (int i = 0; i < rounds; i++) {
+            for (Monkey monkey : monkeys) {
+                while (!monkey.getItems().isEmpty()) {
+                    long worryLevel = monkey.getItems().remove();
+                    long operand = monkey.getOperand() > 0 ? monkey.getOperand() : worryLevel;
+                    worryLevel =
+                        switch (monkey.getOperation()) {
+                            case "*" -> (worryLevel * operand) % lcm;
+                            case "+" -> (worryLevel + operand) % lcm;
+                            default -> throw new RuntimeException("Katakroker");
+                        };
+                    if (flag) {
+                        worryLevel /= 3;
+                    }
+                    if (worryLevel % monkey.getDivisor() == 0) {
+                        monkeys.get(monkey.trueMonkeyId).getItems().add(worryLevel);
+                    } else {
+                        monkeys.get(monkey.falseMonkeyId).getItems().add(worryLevel);
+                    }
+                    monkey.setItemsInspected(monkey.getItemsInspected() + 1);
+                }
+            }
         }
 
-         */
+        return monkeys;
+    }
 
-        Solution solution = new Solution();
-        var result = solution.runPart1(fileName);
+    private Long calculateResult(List<Monkey> monkeyList) {
+        return monkeyList
+            .stream()
+            .map(Monkey::getItemsInspected)
+            .sorted(Comparator.reverseOrder())
+            .limit(2)
+            .reduce(1L, (a, b) -> a * b);
+    }
 
-        return result;
+    @Override
+    public Long getPart1Result(String fileName) {
+        //Source
+        var monkeyList = getMonkeyList(fileName);
+
+        //Transform
+        var monkeyListProcessed = processMonkeys(monkeyList, 20, true);
+
+        //Sink
+        return calculateResult(monkeyListProcessed);
     }
 
     @Override
     public Long getPart2Result(String fileName) {
-        Solution solution = new Solution();
-        var result = solution.runPart2(fileName);
+        //Source
+        var monkeyList = getMonkeyList(fileName);
 
-        return result;
+        //Transform
+        var monkeyListProcessed = processMonkeys(monkeyList, 10000, false);
+
+        //Sink
+        return calculateResult(monkeyListProcessed);
     }
 }

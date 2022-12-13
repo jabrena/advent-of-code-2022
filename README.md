@@ -16,6 +16,7 @@ Solutions for Advent of code 2022
 - [Day 8: Treetop Tree House](src/main/java/jab/aoc/day8)
 - [Day 9: Rope Bridge](src/main/java/jab/aoc/day9) KO :(
 - [Day 10: Cathode-Ray Tube](src/main/java/jab/aoc/day10)
+- [Day 11: Cathode-Ray Tube](src/main/java/jab/aoc/day11)
 - [Day 13: Distress Signal](src/main/java/jab/aoc/day13) KO (I am not a master in Recursion)
 
 ```
