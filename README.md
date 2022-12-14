@@ -17,6 +17,7 @@ Solutions for Advent of code 2022
 - [Day 9: Rope Bridge](src/main/java/jab/aoc/day9) KO :(
 - [Day 10: Cathode-Ray Tube](src/main/java/jab/aoc/day10)
 - [Day 11: Monkey in the Middle](src/main/java/jab/aoc/day11)
+- [Day 12: Hill Climbing Algorithm](src/main/java/jab/aoc/day12)
 - [Day 13: Distress Signal](src/main/java/jab/aoc/day13) KO (I am not a master in Recursion)
 
 ```
