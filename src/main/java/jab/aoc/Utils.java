@@ -103,5 +103,9 @@ public class Utils {
         return Arrays.stream(STRING_SPLIT_PATTERN.split(string))
                 .collect(Collectors.toUnmodifiableSet());
     }
+
+    public static List<String> getCharactersAsList(String string) {
+        return Arrays.stream(STRING_SPLIT_PATTERN.split(string)).toList();
+    }
     // @formatter:on
 }

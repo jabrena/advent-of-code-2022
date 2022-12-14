@@ -5,7 +5,7 @@ import static org.assertj.core.api.BDDAssertions.then;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-public class Day9Test {
+class Day9Test {
 
     @Test
     void given_sampleData_when_execute_day9_getPart1Solution_then_expected_result() {
