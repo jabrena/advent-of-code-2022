@@ -1,6 +1,8 @@
 package jab.aoc;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -42,6 +44,16 @@ public class Utils {
             ClassLoader classloader = Thread.currentThread().getContextClassLoader();
             File file = new File(classloader.getResource(fileName).getFile());
             return Files.readString(Path.of(file.getPath()));
+        } catch (IOException e) {
+            throw new RuntimeException(e.getLocalizedMessage(), e);
+        }
+    }
+
+    public static BufferedReader readFileToBufferedReader(String fileName) {
+        try {
+            ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+            File file = new File(classloader.getResource(fileName).getFile());
+            return new BufferedReader(new FileReader(file));
         } catch (IOException e) {
             throw new RuntimeException(e.getLocalizedMessage(), e);
         }
