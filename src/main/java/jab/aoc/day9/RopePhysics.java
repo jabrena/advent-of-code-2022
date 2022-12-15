@@ -84,9 +84,9 @@ class RopePhysics {
     }
 
     public void execute(Movement movement) {
-        System.out.println();
-        System.out.println("== " + movement.direction() + " " + movement.number() + " ==");
-        System.out.println();
+        //System.out.println();
+        //System.out.println("== " + movement.direction() + " " + movement.number() + " ==");
+        //System.out.println();
 
         for (int i = 0; i < movement.number(); i++) {
             this.moveH(movement.direction());
