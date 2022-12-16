@@ -3,6 +3,7 @@ package jab.aoc.day15;
 import jab.aoc.Utils;
 
 public class Day15Old {
+
     private String[][] createMatrix(String fileName) {
         System.out.println("1. Calculate matrix dimensions");
 
