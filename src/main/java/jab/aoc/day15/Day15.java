@@ -1,230 +1,106 @@
 package jab.aoc.day15;
 
-import jab.aoc.Day;
+import com.google.common.collect.Range;
 import jab.aoc.Utils;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
-public class Day15 implements Day<Long> {
+public class Day15 {
 
-    //TODO Improvement
-    //private static final Pattern PATTERN =
-    //Pattern.compile("Sensor at x=(-?\\d+), y=(-?\\d+):
-    // closest beacon is at x=(-?\\d+), y=(-?\\d+)");
+    private static final String regex = "Sensor at x=(-?\\d+), y=(-?\\d+): closest beacon is at x=(-?\\d+), y=(-?\\d+)";
+    private static final Pattern PATTERN = Pattern.compile(regex);
 
-    private String[][] createMatrix(String fileName) {
-        System.out.println("1. Calculate matrix dimensions");
+    private record Data(Point sp, Point bp, int d) {
+        boolean excludes(Point p) {
+            return sp.dist(p) <= d;
+        }
+    }
 
-        var minSensorX = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[0])
-            .map(str -> str.replaceAll("Sensor at x=", ""))
-            .map(str -> str.split(","))
-            .map(arr -> arr[0])
-            //.peek(System.out::println)
-            .mapToLong(Long::valueOf)
-            .min()
-            .orElseThrow();
+    private record Point(int x, int y) {
 
-        var maxSensorX = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[0])
-            .map(str -> str.replaceAll("Sensor at x=", ""))
-            .map(str -> str.split(","))
-            .map(arr -> arr[0])
-            //.peek(System.out::println)
-            .mapToLong(Long::valueOf)
-            .max()
-            .orElseThrow();
+        public int dist(Point p2) {
+            return Math.abs(x - p2.x) + Math.abs(y - p2.y);
+        }
+    }
 
-        var minSensorY = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[0])
-            .map(str -> str.replaceAll("Sensor at x=", ""))
-            .map(str -> str.split(","))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("y=", ""))
-            .map(String::trim)
-            //.peek(System.out::println)
-            .mapToLong(Long::valueOf)
-            .min()
-            .orElseThrow();
+    private static List<Data> processLines(List<String> lines) {
 
-        var maxSensorY = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[0])
-            .map(str -> str.replaceAll("Sensor at x=", ""))
-            .map(str -> str.split(","))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("y=", ""))
-            .map(String::trim)
-            //.peek(System.out::println)
-            .mapToLong(Long::valueOf)
-            .max()
-            .orElseThrow();
+        Function<String, List<Integer>> getListOfPoints = line -> {
 
-        System.out.println("Sensor Matrix sizes:");
-        System.out.println(minSensorX + "," + minSensorY);
-        System.out.println(maxSensorX + "," + maxSensorX);
-        System.out.println();
-
-        var minBeaconX = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("closest beacon is at x=", ""))
-            .map(str -> str.split(","))
-            .map(str -> str[0])
-            .map(String::trim)
-            .mapToLong(Long::valueOf)
-            .min()
-            .orElseThrow();
-
-        var maxBeaconX = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("closest beacon is at x=", ""))
-            .map(str -> str.split(","))
-            .map(str -> str[0])
-            .map(String::trim)
-            .mapToLong(Long::valueOf)
-            .max()
-            .orElseThrow();
-
-        var minBeaconY = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("closest beacon is at x=", ""))
-            .map(str -> str.split(","))
-            .map(str -> str[1])
-            .map(str -> str.replaceAll("y=", ""))
-            .map(String::trim)
-            .mapToLong(Long::valueOf)
-            .min()
-            .orElseThrow();
-
-        var maxBeaconY = Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("closest beacon is at x=", ""))
-            .map(str -> str.split(","))
-            .map(str -> str[1])
-            .map(str -> str.replaceAll("y=", ""))
-            .map(String::trim)
-            .mapToLong(Long::valueOf)
-            .max()
-            .orElseThrow();
-
-        System.out.println("Beacon Matrix sizes:");
-        System.out.println(minBeaconX + "," + minBeaconY);
-        System.out.println(maxBeaconX + "," + maxBeaconY);
-        System.out.println();
-
-        var absoluteMinX = Math.min(minSensorX, minBeaconX);
-        var absoluteMaxX = Math.max(maxSensorX, maxBeaconX);
-        var absoluteMinY = Math.min(minSensorY, minBeaconY);
-        var absoluteMaxY = Math.max(maxSensorY, maxBeaconY);
-
-        System.out.println("Matrix sizes:");
-        System.out.println(absoluteMinX + "," + absoluteMinY);
-        System.out.println(absoluteMaxX + "," + absoluteMaxY);
-        System.out.println();
-
-        Integer dimX = Math.toIntExact(Math.abs(absoluteMinX) + absoluteMaxX);
-        Integer dimY = Math.toIntExact(absoluteMinY + absoluteMaxY);
-        System.out.println(dimX + "," + dimY);
-
-        String[][] matrix = new String[dimY + 1][dimX + 1];
-
-        System.out.println("Load Sensors in the matrix");
-        Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[0])
-            .map(str -> str.replaceAll("Sensor at x=", ""))
-            .forEach(str -> {
-                var parts = str.split(",");
-                int x = Integer.parseInt(parts[0].trim()) + (int) Math.abs(absoluteMinX);
-                int y = Integer.parseInt(parts[1].trim().replaceAll("y=", ""));
-
-                matrix[y][x] = "S";
-            });
-
-        System.out.println("Load Beacons in the matrix");
-        Utils
-            .readFileToList(fileName)
-            .stream()
-            .map(str -> str.split(":"))
-            .map(arr -> arr[1])
-            .map(str -> str.replaceAll("closest beacon is at x=", ""))
-            .forEach(str -> {
-                var parts = str.split(",");
-                int x = Integer.parseInt(parts[0].trim()) + (int) Math.abs(absoluteMinX);
-                int y = Integer.parseInt(parts[1].trim().replaceAll("y=", ""));
-
-                matrix[y][x] = "B";
-            });
-
-        for (var y = 0; y < matrix.length; y++) {
-            if (y < 10) {
-                System.out.print(" ");
+            List<Integer> list = new ArrayList<>();
+            Matcher matcher = PATTERN.matcher(line);
+            if (matcher.find()) {
+                list.add(Integer.parseInt(matcher.group(1)));
+                list.add(Integer.parseInt(matcher.group(2)));
+                list.add(Integer.parseInt(matcher.group(3)));
+                list.add(Integer.parseInt(matcher.group(4)));
             }
-            System.out.print(y);
-            System.out.print(" ");
-            for (var x = 0; x < matrix[0].length; x++) {
-                if (matrix[y][x] == null) {
-                    System.out.print(".");
-                    continue;
-                }
-                if (matrix[y][x].equals("B")) {
-                    System.out.print("B");
-                    continue;
-                }
-                if (matrix[y][x].equals("S")) {
-                    System.out.print("S");
-                    continue;
+            return list;
+        };
+
+        return lines
+                .stream()
+                .map(getListOfPoints)
+                .map(list -> {
+                    var sp = new Point(list.get(0), list.get(1));
+                    var bp = new Point(list.get(2), list.get(3));
+                    return new Data(sp, bp, sp.dist(bp));
+                })
+                .toList();
+    }
+
+    public Long getPart1Result(String fileName, Integer y) {
+        //Source
+        var fileLines = Utils.readFileToList(fileName);
+
+        //Transform
+        var processed = processLines(fileLines);
+        int min = processed.stream().mapToInt(s -> s.sp().x() - s.d).min().orElseThrow();
+        int max = processed.stream().mapToInt(s -> s.sp().x() + s.d).max().orElseThrow();
+
+        System.out.println(min);
+        System.out.println(max);
+
+        //Sink
+        return IntStream.range(min, max)
+                .mapToObj(x -> new Point(x, y))
+                .filter(p -> processed.stream().anyMatch(it -> it.excludes(p) && !it.bp.equals(p)))
+                .count();
+    }
+
+    public Long getPart2Result(String fileName) {
+        //Source
+        var fileLines = Utils.readFileToList(fileName);
+
+        //Transform
+        var processed = processLines(fileLines);
+
+        //Sink
+        int max = 4000000;
+        for (int y = 0; y <= max; y++) {
+            var ranges = new ArrayList<Range<Integer>>();
+            for (var s : processed) {
+                int dx = s.d - Math.abs(y - s.sp.y());
+                if (dx >= 0) {
+                    ranges.add(Range.closed(s.sp.x() - dx, s.sp.x() + dx));
                 }
             }
-            System.out.println();
+
+            for (int x = 0; x <= max; ) {
+                int xx = x;
+                var range = ranges.stream().filter(r -> r.contains(xx)).findFirst();
+                if (range.isPresent()) {
+                    x = range.get().upperEndpoint() + 1;
+                } else {
+                    return (long) x * max + y;
+                }
+            }
         }
 
-        return matrix;
-    }
-
-    record Point(int x, int y) {}
-
-    private int distManhattan(Point origin, Point destination) {
-        return Math.abs(origin.x - destination.x) + Math.abs(origin.y - destination.y);
-    }
-
-    @Override
-    public Long getPart1Result(String fileName) {
-        var y = 10;
-
-        var matrix = createMatrix(fileName);
-
-        return null;
-    }
-
-    @Override
-    public Long getPart2Result(String fileName) {
-        var y = 2000000;
-
-        return null;
+        return 0L; // not reached
     }
 }
