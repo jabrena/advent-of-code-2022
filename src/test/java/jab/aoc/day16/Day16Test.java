@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class Day16Test {
 
     @Test
-    void given_sampleData_when_execute_day15_getPart1Solution_then_expected_result() {
+    void given_sampleData_when_execute_day16_getPart1Solution_then_expected_result() {
         //Given
         String fileName = "day16/input-sample.txt";
 
@@ -16,6 +16,6 @@ class Day16Test {
         var result = day16.getPart1Result(fileName);
 
         //Then
-        then(result).isEqualTo(10);
+        then(result).isEqualTo(1651);
     }
 }
