@@ -13,8 +13,8 @@ public class Day15Test {
 
         //When
         var y = 10;
-        Day15 day13 = new Day15();
-        var result = day13.getPart1Result(fileName, y);
+        Day15 day15 = new Day15();
+        var result = day15.getPart1Result(fileName, y);
 
         //Then
         then(result).isEqualTo(26);
