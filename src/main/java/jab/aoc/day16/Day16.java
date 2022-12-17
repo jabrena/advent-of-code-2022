@@ -2,6 +2,7 @@ package jab.aoc.day16;
 
 import jab.aoc.Day;
 import jab.aoc.Utils;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -23,10 +24,34 @@ public class Day16 implements Day<Long> {
         .collect(Collectors.joining(""));
     private static final Pattern pattern = Pattern.compile(regex);
 
-    private record Valve(String name, boolean open, Integer rate, List<String> connections) {}
+    private record Valve(String name, Integer rate, List<String> connections) {}
+
+    private record Valve2(String id, int flowRate, List<String> available) {
+        private static final Pattern PATTERN = Pattern.compile(
+            "Valve (\\w+) has flow rate=(\\d+); \\w+ \\w+ to \\w+ (.+)"
+        );
+
+        static Valve2 parse(String line) {
+            var matcher = PATTERN.matcher(line);
+            if (matcher.matches()) {
+                String id = matcher.group(1);
+                int rate = Integer.parseInt(matcher.group(2));
+                List<String> next = Arrays.asList(matcher.group(3).trim().split(", "));
+                return new Valve2(id, rate, next);
+            }
+            throw new IllegalArgumentException("does not match: " + line);
+        }
+    }
 
     @Override
     public Long getPart1Result(String fileName) {
+        try {
+            ProboscideaVolcanium proboscideaVolcanium = new ProboscideaVolcanium();
+            proboscideaVolcanium.solution(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
         // @formatter:off
 
         //Source
@@ -36,7 +61,6 @@ public class Day16 implements Day<Long> {
                 Matcher matcher = pattern.matcher(line);
 
                 String name = "";
-                Boolean status = false;
                 Integer flowRate = 0;
                 List<String> connected = new ArrayList<>();
 
@@ -52,7 +76,7 @@ public class Day16 implements Day<Long> {
                         connected.addAll(list2);
                     }
                 }
-                return new Valve(name, status, flowRate, connected);
+                return new Valve(name, flowRate, connected);
             })
             .toList();
 

@@ -18,4 +18,17 @@ class Day16Test {
         //Then
         then(result).isEqualTo(1651);
     }
+
+    @Test
+    void given_data_when_execute_day16_getPart1Solution_then_expected_result() {
+        //Given
+        String fileName = "day16/input.txt";
+
+        //When
+        Day16 day16 = new Day16();
+        var result = day16.getPart1Result(fileName);
+
+        //Then
+        then(result).isEqualTo(1651);
+    }
 }
